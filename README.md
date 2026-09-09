@@ -5,6 +5,8 @@
 FOUR MINDS. TWO ORIGINS. ONE SYSTEM.
 `PROJECT : CONNECTION : 00` — DEBUT SHOWCASE `09.15.2026`
 
+**Live site:** https://seune-h0203.github.io/cones/
+
 ---
 
 ## Project Overview
@@ -220,6 +222,9 @@ state changes everywhere it's checked.
   state — the scroll-driven founding sequence included.
 
 ## Deployment
+
+Repository: **[seune-h0203/cones](https://github.com/seune-h0203/cones)**
+Live URL: **https://seune-h0203.github.io/cones/**
 
 Build is fully static (Vite → `dist/`) and ships with
 `.github/workflows/deploy.yml`, which builds and publishes to **GitHub
