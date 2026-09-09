@@ -1,0 +1,300 @@
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 140px var(--gutter) 120px;
+}
+
+.heroBg {
+  position: absolute;
+  inset: -12%;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(255, 255, 255, 0.09), transparent 55%),
+    radial-gradient(ellipse at 16% 82%, rgba(255, 255, 255, 0.05), transparent 52%),
+    radial-gradient(ellipse at 84% 70%, rgba(255, 255, 255, 0.04), transparent 50%),
+    var(--c-black);
+  animation: drift 22s var(--ease-inout) infinite alternate;
+}
+
+@keyframes drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.2%, 1%, 0);
+  }
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-md);
+  width: 100%;
+}
+
+.heroKicker {
+  animation: fadeUp 1.2s var(--ease) both 200ms;
+}
+
+.heroTitle {
+  margin: var(--s-sm) 0;
+}
+
+.heroLogo {
+  width: min(760px, 86vw);
+  transform: translate3d(var(--px, 0), var(--py, 0), 0);
+  transition: transform 700ms var(--ease);
+}
+
+.heroTagline {
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  letter-spacing: 0.06em;
+  animation: fadeUp 1.2s var(--ease) both 520ms;
+}
+
+.heroDebut {
+  margin-top: var(--s-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-md);
+  animation: fadeUp 1.2s var(--ease) both 680ms;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-sm);
+  justify-content: center;
+  margin-top: var(--s-md);
+  animation: fadeUp 1.2s var(--ease) both 820ms;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.scrollCue {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--t-micro);
+  letter-spacing: 0.34em;
+  color: var(--c-faint);
+  z-index: 2;
+}
+
+.scrollCue::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(var(--c-faint), transparent);
+}
+
+/* ---------- 01 debut ---------- */
+
+.debutPanel {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--s-lg);
+  align-items: center;
+  border-top: 1px solid var(--c-line-soft);
+  border-bottom: 1px solid var(--c-line-soft);
+  padding-block: var(--s-lg);
+}
+
+.debutValue {
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  margin-top: var(--s-sm);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.debutTimer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-md);
+}
+
+.debutStatus {
+  font-size: var(--t-micro);
+  letter-spacing: 0.26em;
+  color: var(--c-dim);
+}
+
+/* ---------- 02 origins ---------- */
+
+.originGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--c-line-soft);
+  border: 1px solid var(--c-line-soft);
+  margin-bottom: var(--s-xl);
+}
+
+.originCard {
+  background: var(--c-black);
+  padding: clamp(28px, 4vw, 60px);
+}
+
+.originTitle {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-top: var(--s-xs);
+}
+
+.originMandate {
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-silver);
+  margin-top: var(--s-xs);
+}
+
+.originBody {
+  margin-top: var(--s-md);
+  color: var(--c-dim);
+  max-width: 42ch;
+}
+
+.originArtists {
+  margin-top: var(--s-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-sm);
+}
+
+.originArtistLink {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-md);
+  padding-block: 12px;
+  border-top: 1px solid var(--c-line-soft);
+  font-size: 1.6rem;
+  color: var(--c-silver);
+  transition: color var(--m-fast) var(--ease);
+}
+
+.originArtistLink:hover {
+  color: var(--c-white);
+}
+
+.originAbility {
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+  color: var(--c-faint);
+}
+
+/* ---------- 03 artists ---------- */
+
+.artistGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--c-line-soft);
+  border-block: 1px solid var(--c-line-soft);
+}
+
+.artistsFoot {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--s-lg);
+}
+
+/* ---------- 04 connection ---------- */
+
+.connection {
+  padding-top: var(--s-2xl);
+}
+
+/* ---------- 05 project ---------- */
+
+.projectPanel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-lg);
+  max-width: 62ch;
+}
+
+/* ---------- 06 final ---------- */
+
+.final {
+  padding-block: var(--s-2xl);
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.05), transparent 62%);
+}
+
+.finalInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finalLogo {
+  width: min(460px, 72vw);
+  height: auto;
+  margin-inline: auto;
+}
+
+.finalTagline {
+  margin-top: var(--s-md);
+}
+
+.finalActions {
+  margin-top: var(--s-lg);
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 1100px) {
+  .artistGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .debutPanel,
+  .originGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .artistGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .artistsFoot {
+    justify-content: stretch;
+  }
+
+  .artistsFoot :global(.u-btn) {
+    width: 100%;
+    justify-content: center;
+  }
+}

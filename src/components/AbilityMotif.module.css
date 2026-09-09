@@ -1,0 +1,142 @@
+.motif {
+  border: 1px solid var(--c-line-soft);
+  background: linear-gradient(160deg, var(--c-ink), var(--c-black));
+  padding: clamp(20px, 3vw, 36px);
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ---------- LEARN ---------- */
+
+.dot,
+.dotActive {
+  fill: var(--c-faint);
+  opacity: 0;
+  transition: opacity var(--m-normal) var(--ease);
+}
+
+.dotActive {
+  fill: #ffffff;
+}
+
+.motif[data-on="true"] .dot {
+  opacity: 0.75;
+}
+
+.motif[data-on="true"] .dotActive {
+  opacity: 1;
+}
+
+.scan {
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-width: 1;
+  opacity: 0;
+}
+
+.motif[data-on="true"] .scan {
+  opacity: 1;
+  animation: scan 3.6s var(--ease-inout) infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(28px);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(192px);
+    opacity: 0;
+  }
+}
+
+/* ---------- PREDICT ---------- */
+
+.origin {
+  fill: #ffffff;
+  opacity: 0;
+  transition: opacity var(--m-normal) var(--ease);
+}
+
+.motif[data-on="true"] .origin {
+  opacity: 1;
+}
+
+.branch {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.2;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1400ms var(--ease);
+}
+
+.motif[data-on="true"] .branch {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- DESIGN ---------- */
+
+.frame {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1600ms var(--ease);
+}
+
+.guide {
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1800ms var(--ease) 600ms;
+}
+
+.motif[data-on="true"] .frame,
+.motif[data-on="true"] .guide {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- EXECUTE ---------- */
+
+.bar {
+  fill: rgba(255, 255, 255, 0.68);
+  transform: scaleX(0);
+  transform-box: fill-box;
+  transform-origin: left center;
+  transition: transform 900ms var(--ease);
+}
+
+.motif[data-on="true"] .bar {
+  transform: scaleX(1);
+}
+
+.run {
+  fill: #ffffff;
+  opacity: 0;
+  transition: opacity var(--m-normal) var(--ease) 700ms;
+}
+
+.motif[data-on="true"] .run {
+  opacity: 1;
+  animation: pulse 2.4s var(--ease-inout) 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}

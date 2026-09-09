@@ -1,0 +1,129 @@
+.card {
+  position: relative;
+  display: block;
+  background: var(--c-ink);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 3 / 4.35;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.05) 38%,
+    rgba(5, 5, 6, 0.92) 100%
+  );
+  transition: opacity var(--m-normal) var(--ease);
+}
+
+.sweep {
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  left: -60%;
+  width: 38%;
+  background: var(--chrome-sweep);
+  transform: skewX(-18deg);
+  transition: left var(--m-slow) var(--ease);
+  z-index: 2;
+}
+
+.card:hover .sweep,
+.card:focus-visible .sweep {
+  left: 130%;
+}
+
+.card:hover .image,
+.card:focus-visible .image {
+  transform: scale(1.08);
+  filter: grayscale(28%) contrast(1.06) brightness(0.98);
+}
+
+.meta {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  padding: clamp(20px, 2vw, 30px);
+}
+
+.index {
+  display: block;
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-dim);
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: clamp(1.7rem, 2.2vw, 2.4rem);
+  margin-bottom: 14px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.unit,
+.ability {
+  font-size: var(--t-micro);
+  letter-spacing: 0.18em;
+  padding: 5px 10px;
+  border: 1px solid var(--c-line);
+  color: var(--c-dim);
+}
+
+.ability {
+  border-color: var(--c-line-strong);
+  color: var(--c-white);
+}
+
+.view {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-white);
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height var(--m-normal) var(--ease),
+    opacity var(--m-normal) var(--ease),
+    margin-top var(--m-normal) var(--ease);
+}
+
+.card:hover .view,
+.card:focus-visible .view {
+  max-height: 40px;
+  opacity: 1;
+  margin-top: 18px;
+}
+
+@media (hover: none) {
+  .view {
+    max-height: 40px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+}

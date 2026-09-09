@@ -1,0 +1,214 @@
+/* ---------- loading screen ---------- */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background: var(--c-black);
+  display: grid;
+  place-items: center;
+  transition:
+    opacity var(--m-normal) var(--ease),
+    visibility var(--m-normal);
+}
+
+.loader[data-ready="true"] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loaderInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-md);
+  padding: var(--gutter);
+}
+
+.loaderLogo {
+  width: min(360px, 66vw);
+}
+
+.loaderStatus {
+  color: var(--c-dim);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  margin-top: 4px;
+}
+
+.step {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: var(--t-micro);
+  letter-spacing: 0.2em;
+  opacity: 0.28;
+  transition: opacity var(--m-fast) var(--ease);
+}
+
+.step[data-on="true"] {
+  opacity: 1;
+}
+
+.stepIndex {
+  color: var(--c-faint);
+}
+
+.stepLabel {
+  color: var(--c-silver);
+  transition: color var(--m-fast) var(--ease);
+}
+
+.step[data-on="true"] .stepLabel {
+  color: var(--c-white);
+}
+
+/* ---------- page transition ---------- */
+
+.transition {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-transition);
+  pointer-events: none;
+  background: var(--c-black);
+  transform-origin: top;
+  animation: wipe 760ms var(--ease) forwards;
+}
+
+.transition::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.85), transparent);
+  animation: wipeLine 760ms var(--ease) forwards;
+}
+
+@keyframes wipe {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  55% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes wipeLine {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ---------- custom cursor ---------- */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity var(--m-fast) var(--ease);
+}
+
+.cursor[data-visible="true"] {
+  opacity: 1;
+}
+
+.cursorDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-white);
+  transform: translate(-50%, -50%);
+  transition:
+    width var(--m-fast) var(--ease),
+    height var(--m-fast) var(--ease);
+}
+
+.cursor[data-state="view"] .cursorDot,
+.cursor[data-state="play"] .cursorDot {
+  width: 11px;
+  height: 11px;
+}
+
+.cursorLabel {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-white);
+  transform: translateY(-50%);
+  white-space: nowrap;
+}
+
+/* ---------- easter egg ---------- */
+
+.egg {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background: rgba(5, 5, 6, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: eggFade 2600ms var(--ease) forwards;
+}
+
+.eggInner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-md);
+}
+
+.eggSymbol {
+  font-size: 1.1rem;
+  letter-spacing: 0.4em;
+  color: var(--c-silver);
+}
+
+.eggText {
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes eggFade {
+  0% {
+    opacity: 0;
+  }
+  12%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

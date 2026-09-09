@@ -1,0 +1,51 @@
+.root {
+  margin-bottom: var(--s-xl);
+}
+
+.root:has(.inner[data-compact="true"]) {
+  margin-bottom: var(--s-lg);
+}
+
+.inner[data-align="center"] {
+  text-align: center;
+  margin-inline: auto;
+  max-width: 780px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--s-sm);
+  margin-bottom: var(--s-md);
+}
+
+.inner[data-align="center"] .meta {
+  justify-content: center;
+}
+
+.index {
+  color: var(--c-faint);
+}
+
+.index::after {
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 1px;
+  background: var(--c-line);
+  vertical-align: middle;
+  margin-left: var(--s-sm);
+}
+
+.title {
+  font-size: var(--t-display);
+}
+
+.lead {
+  margin-top: var(--s-md);
+  max-width: 60ch;
+}
+
+.inner[data-align="center"] .lead {
+  margin-inline: auto;
+}

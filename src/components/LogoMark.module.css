@@ -1,0 +1,102 @@
+.mark {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- glow ---------- */
+
+.mark[data-glow="true"] .img {
+  animation: glow 3.6s var(--ease-inout) infinite;
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.1));
+  }
+  50% {
+    filter: drop-shadow(0 0 56px rgba(255, 255, 255, 0.26));
+  }
+}
+
+/* ---------- pulse (boot screen) ---------- */
+
+.mark[data-pulse="true"] .img {
+  animation: pulse 2.4s var(--ease-inout) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- shine: a highlight sweep clipped to the logo's own silhouette ---------- */
+
+.shine {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background: linear-gradient(
+    112deg,
+    transparent 36%,
+    rgba(255, 255, 255, 0.95) 50%,
+    transparent 64%
+  );
+  background-size: 300% 100%;
+  background-position: 160% 0;
+  mix-blend-mode: screen;
+  animation: shine 4.8s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0%,
+  38% {
+    background-position: 160% 0;
+  }
+  72%,
+  100% {
+    background-position: -160% 0;
+  }
+}
+
+/* ---------- reveal: power-on wipe on mount ---------- */
+
+.mark[data-reveal="true"] {
+  animation: reveal 1.3s var(--ease) both;
+  animation-delay: var(--logo-delay, 0ms);
+}
+
+@keyframes reveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0% 0 0);
+    opacity: 1;
+  }
+}

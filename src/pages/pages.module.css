@@ -1,0 +1,273 @@
+/* shared layout for PROJECT / ABOUT / 404 */
+
+.page {
+  padding-top: 84px;
+}
+
+.hero {
+  padding-block: var(--s-2xl) var(--s-xl);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.heroTitle {
+  font-size: var(--t-hero);
+  margin-top: var(--s-md);
+}
+
+.heroMeta {
+  margin-top: var(--s-md);
+  font-size: var(--t-label);
+  letter-spacing: 0.28em;
+  color: var(--c-silver);
+}
+
+.heroLead {
+  margin-top: var(--s-lg);
+  max-width: 54ch;
+}
+
+.section {
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+/* ---------- project sequence ---------- */
+
+.sequence {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--c-line-soft);
+  border: 1px solid var(--c-line-soft);
+}
+
+.sequenceStep {
+  background: var(--c-black);
+  padding: clamp(28px, 4vw, 56px) var(--s-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-md);
+  min-height: 220px;
+  text-align: center;
+}
+
+.sequenceSymbol {
+  font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+  letter-spacing: 0.2em;
+  color: var(--c-white);
+  white-space: pre;
+}
+
+.sequenceLogo {
+  width: min(220px, 70%);
+  height: auto;
+}
+
+/* ---------- project concept ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s-xl);
+  align-items: start;
+}
+
+.originList {
+  display: flex;
+  flex-direction: column;
+}
+
+.originRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--s-md);
+  padding-block: var(--s-md);
+  border-top: 1px solid var(--c-line-soft);
+}
+
+.originRow:last-child {
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.originIndex {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-faint);
+}
+
+.originName {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+}
+
+.originMandate {
+  font-size: var(--t-micro);
+  letter-spacing: 0.2em;
+  color: var(--c-dim);
+}
+
+.debut {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-lg);
+  flex-wrap: wrap;
+}
+
+/* ---------- about team ---------- */
+
+.team {
+  border-top: 1px solid var(--c-line-soft);
+}
+
+.teamRow {
+  display: grid;
+  grid-template-columns: 76px 1.2fr 1fr auto;
+  align-items: center;
+  gap: var(--s-md);
+  padding-block: var(--s-sm);
+  border-bottom: 1px solid var(--c-line-soft);
+  transition: background var(--m-fast) var(--ease);
+}
+
+.teamRow:hover {
+  background: var(--c-ink);
+}
+
+.teamImage {
+  width: 76px;
+  height: 96px;
+  object-fit: cover;
+}
+
+.teamRow:hover .teamImage {
+  filter: grayscale(28%) contrast(1.06) brightness(0.98);
+}
+
+.teamName {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.teamStage {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+}
+
+.teamKorean {
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+  color: var(--c-dim);
+}
+
+.teamRole {
+  font-size: var(--t-micro);
+  letter-spacing: 0.18em;
+  color: var(--c-silver);
+}
+
+.teamUnit {
+  font-size: var(--t-micro);
+  letter-spacing: 0.18em;
+  color: var(--c-faint);
+  text-align: right;
+}
+
+.aboutFoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-lg);
+  align-items: flex-start;
+  max-width: 62ch;
+}
+
+.aboutActions {
+  display: flex;
+  gap: var(--s-sm);
+  flex-wrap: wrap;
+}
+
+.leadership {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-md);
+  flex-wrap: wrap;
+  padding-bottom: var(--s-sm);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.leadershipName {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.leadershipRole {
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+  color: var(--c-dim);
+}
+
+/* ---------- 404 ---------- */
+
+.notFound {
+  min-height: 82svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-md);
+  text-align: center;
+  padding: 140px var(--gutter) var(--s-2xl);
+}
+
+.notFoundCode {
+  font-size: var(--t-label);
+  letter-spacing: 0.4em;
+  color: var(--c-faint);
+}
+
+.notFoundTitle {
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.notFoundLead {
+  max-width: 40ch;
+  margin-bottom: var(--s-sm);
+}
+
+@media (max-width: 900px) {
+  .sequence {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split {
+    grid-template-columns: 1fr;
+    gap: var(--s-lg);
+  }
+
+  .teamRow {
+    grid-template-columns: 64px 1fr;
+    row-gap: var(--s-xs);
+  }
+
+  .teamImage {
+    width: 64px;
+    height: 80px;
+  }
+
+  .teamRole,
+  .teamUnit {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+@media (max-width: 520px) {
+  .sequence {
+    grid-template-columns: 1fr;
+  }
+}

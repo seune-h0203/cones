@@ -1,0 +1,163 @@
+.page {
+  padding-top: 84px;
+}
+
+.hero {
+  padding-block: var(--s-2xl) var(--s-xl);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.heroTitle {
+  font-size: var(--t-hero);
+  margin-top: var(--s-md);
+}
+
+.heroLead {
+  margin-top: var(--s-lg);
+  max-width: 52ch;
+}
+
+.section {
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+/* ---------- origins ---------- */
+
+.origins {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--c-line-soft);
+  border: 1px solid var(--c-line-soft);
+}
+
+.originCard {
+  background: var(--c-black);
+  padding: clamp(28px, 4vw, 64px);
+}
+
+.originIndex {
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-faint);
+}
+
+.originName {
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  margin-top: var(--s-sm);
+}
+
+.originMandate {
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-silver);
+  margin-top: 10px;
+}
+
+.originBody {
+  margin-top: var(--s-md);
+  color: var(--c-dim);
+  max-width: 40ch;
+}
+
+/* ---------- roster ---------- */
+
+.roster {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-lg);
+}
+
+.member {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--s-md);
+  align-items: center;
+  border: 1px solid var(--c-line-soft);
+  padding: var(--s-sm);
+  transition: border-color var(--m-fast) var(--ease);
+  height: 100%;
+}
+
+.member:hover {
+  border-color: var(--c-line);
+}
+
+.memberMedia {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+}
+
+.memberImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.member:hover .memberImage {
+  filter: grayscale(30%) contrast(1.06) brightness(0.98);
+  transform: scale(1.04);
+}
+
+.memberBody {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: var(--s-sm);
+}
+
+.memberName {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+}
+
+.memberAbility {
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.memberLine {
+  font-size: var(--t-body);
+  color: var(--c-dim);
+}
+
+/* ---------- connection ---------- */
+
+.connection {
+  padding-top: var(--s-2xl);
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.systemFoot {
+  margin-top: var(--s-xl);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  .roster {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .origins {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .member {
+    grid-template-columns: 1fr;
+  }
+
+  .memberMedia {
+    aspect-ratio: 16 / 10;
+  }
+
+  .memberBody {
+    padding: 0 var(--s-xs) var(--s-xs);
+  }
+}

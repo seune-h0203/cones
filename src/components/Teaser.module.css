@@ -1,0 +1,338 @@
+/* ---------- shared stage ---------- */
+
+.stage {
+  position: relative;
+  border: 1px solid var(--c-line-soft);
+  background: var(--c-ink);
+}
+
+.overlayMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-md);
+  padding: 12px 18px;
+  border-top: 1px solid var(--c-line-soft);
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+  color: var(--c-faint);
+  flex-wrap: wrap;
+}
+
+/* ---------- video player ---------- */
+
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bigPlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-sm);
+  background: rgba(5, 5, 6, 0.35);
+  transition: background var(--m-fast) var(--ease);
+}
+
+.bigPlay:hover {
+  background: rgba(5, 5, 6, 0.2);
+}
+
+.bigPlayIcon {
+  width: 0;
+  height: 0;
+  border-left: 20px solid var(--c-white);
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+}
+
+.bigPlayLabel {
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-white);
+}
+
+.controls {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-sm);
+  padding: 14px 18px;
+  background: linear-gradient(180deg, transparent, rgba(5, 5, 6, 0.9));
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--m-fast) var(--ease),
+    transform var(--m-fast) var(--ease);
+}
+
+.player:hover .controls,
+.player:focus-within .controls,
+.player[data-playing="false"] .controls {
+  opacity: 1;
+  transform: none;
+}
+
+.control {
+  font-size: var(--t-micro);
+  letter-spacing: 0.2em;
+  color: var(--c-silver);
+  padding: 4px 6px;
+  transition: color var(--m-fast) var(--ease);
+  white-space: nowrap;
+}
+
+.control:hover {
+  color: var(--c-white);
+}
+
+.progress {
+  flex: 1;
+  appearance: none;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.24);
+  cursor: pointer;
+}
+
+.progress::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--c-white);
+}
+
+.progress::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--c-white);
+}
+
+.time {
+  font-size: var(--t-micro);
+  color: var(--c-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- fallbacks ---------- */
+
+.fallback {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.fallbackImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fallbackNote {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  color: var(--c-silver);
+}
+
+.pending {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.pendingImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+.pending::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(5, 5, 6, 0.97) 0%, rgba(5, 5, 6, 0.86) 38%, rgba(5, 5, 6, 0.18) 78%, transparent 100%),
+    linear-gradient(180deg, rgba(5, 5, 6, 0.45), transparent 45%);
+}
+
+.pendingBody {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-sm);
+  padding: clamp(24px, 4vw, 56px);
+  max-width: 620px;
+}
+
+.pendingKicker {
+  color: var(--c-silver);
+}
+
+.pendingName {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+}
+
+.pendingMeta {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-dim);
+  margin-bottom: var(--s-xs);
+}
+
+.pendingBody :global(.u-btn) {
+  align-self: flex-start;
+}
+
+/* ---------- modal ---------- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(4, 4, 5, 0.96);
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  animation: modalIn var(--m-normal) var(--ease) both;
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalPanel {
+  width: min(1180px, 100%);
+  border: 1px solid var(--c-line);
+  background: var(--c-ink);
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+.modalHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-md);
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.modalName {
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--c-white);
+  margin-bottom: 6px;
+}
+
+.modalClose {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-silver);
+  padding: 6px 8px;
+  transition: color var(--m-fast) var(--ease);
+}
+
+.modalClose:hover {
+  color: var(--c-white);
+}
+
+.modalPending {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.modalPendingImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 28%;
+  filter: grayscale(94%) contrast(1.08) brightness(0.34);
+}
+
+.modalPending::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(5, 5, 6, 0.82), rgba(5, 5, 6, 0.35) 70%);
+}
+
+.modalPendingBody {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-sm);
+  text-align: center;
+  padding: var(--s-md);
+}
+
+.modalPendingTitle {
+  font-size: clamp(1.8rem, 4.4vw, 3.2rem);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.modalPendingMeta {
+  font-size: var(--t-micro);
+  letter-spacing: 0.26em;
+  color: var(--c-silver);
+}
+
+.modalPendingNote {
+  font-size: var(--t-body);
+  color: var(--c-dim);
+  max-width: 42ch;
+}
+
+@media (max-width: 767px) {
+  .player,
+  .pending,
+  .modalPending,
+  .fallback {
+    aspect-ratio: 4 / 5;
+  }
+
+  .controls {
+    opacity: 1;
+    transform: none;
+    flex-wrap: wrap;
+  }
+
+  .time {
+    display: none;
+  }
+}

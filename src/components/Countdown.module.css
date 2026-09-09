@@ -1,0 +1,73 @@
+.root {
+  display: inline-block;
+}
+
+.units {
+  display: flex;
+  align-items: flex-start;
+}
+
+.unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-inline: clamp(14px, 2.2vw, 30px);
+}
+
+.unit:first-child {
+  padding-left: 0;
+}
+
+.value {
+  font-size: clamp(1.6rem, 3.4vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--c-white);
+  font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.label {
+  margin-top: 10px;
+  font-family: var(--f-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.3em;
+  color: var(--c-faint);
+}
+
+.divider {
+  position: absolute;
+  right: -1px;
+  top: 6px;
+  bottom: 22px;
+  width: 1px;
+  background: var(--c-line-soft);
+}
+
+.root[data-variant="inline"] .value {
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+}
+
+.dday {
+  font-size: var(--t-display);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.live {
+  margin-top: var(--s-sm);
+  color: var(--c-silver);
+}
+
+.chip {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-silver);
+  border: 1px solid var(--c-line);
+  padding: 6px 12px;
+  white-space: nowrap;
+}

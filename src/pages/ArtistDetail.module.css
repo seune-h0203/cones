@@ -1,0 +1,353 @@
+.page {
+  padding-top: 84px;
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 52fr 48fr;
+  align-items: stretch;
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+.heroMedia {
+  position: relative;
+  overflow: hidden;
+  min-height: 78vh;
+  background: var(--c-ink);
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  animation: heroIn 1600ms var(--ease) both;
+}
+
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.heroMedia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 60%, rgba(5, 5, 6, 0.7));
+}
+
+.heroBody {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--s-sm);
+  padding: var(--s-xl) var(--gutter);
+}
+
+.heroKicker {
+  animation: bodyIn 1s var(--ease) both 200ms;
+}
+
+.heroName {
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  animation: bodyIn 1s var(--ease) both 320ms;
+}
+
+.heroKorean {
+  font-size: 1.1rem;
+  letter-spacing: 0.24em;
+  color: var(--c-silver);
+  animation: bodyIn 1s var(--ease) both 420ms;
+}
+
+@keyframes bodyIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.heroTags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: var(--s-xs);
+}
+
+.tag,
+.tagStrong {
+  font-size: var(--t-micro);
+  letter-spacing: 0.2em;
+  padding: 7px 12px;
+  border: 1px solid var(--c-line);
+  color: var(--c-dim);
+}
+
+.tagStrong {
+  border-color: var(--c-line-strong);
+  color: var(--c-white);
+}
+
+.heroQuote {
+  font-family: var(--f-display);
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  line-height: 1.3;
+  color: var(--c-white);
+  padding-block: var(--s-md);
+  margin-block: var(--s-xs);
+  border-top: 1px solid var(--c-line-soft);
+  border-bottom: 1px solid var(--c-line-soft);
+  width: 100%;
+  max-width: 30ch;
+}
+
+/* ---------- sections ---------- */
+
+.section {
+  border-bottom: 1px solid var(--c-line-soft);
+}
+
+/* ---------- profile ---------- */
+
+.profile {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--c-line-soft);
+  border: 1px solid var(--c-line-soft);
+}
+
+.profileRow {
+  background: var(--c-black);
+  padding: clamp(20px, 2.4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profileLabel {
+  font-size: var(--t-micro);
+  letter-spacing: 0.26em;
+  color: var(--c-faint);
+}
+
+.profileValue {
+  font-size: 1.05rem;
+  color: var(--c-white);
+  line-height: 1.5;
+}
+
+/* ---------- ability ---------- */
+
+.abilityGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s-xl);
+  align-items: center;
+}
+
+.abilityBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-md);
+}
+
+.abilityTitle {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.abilityLine {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-silver);
+  padding-top: var(--s-md);
+  border-top: 1px solid var(--c-line-soft);
+}
+
+/* ---------- unit ---------- */
+
+.unitPanel {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--s-xl);
+  align-items: center;
+}
+
+.unitMandate {
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  color: var(--c-silver);
+  margin-bottom: var(--s-md);
+}
+
+.partner {
+  display: flex;
+  align-items: center;
+  gap: var(--s-md);
+  border: 1px solid var(--c-line-soft);
+  padding: var(--s-sm);
+  transition: border-color var(--m-fast) var(--ease);
+}
+
+.partner:hover {
+  border-color: var(--c-line-strong);
+}
+
+.partnerImage {
+  width: 96px;
+  height: 124px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.partner:hover .partnerImage {
+  filter: grayscale(30%) contrast(1.06) brightness(0.98);
+}
+
+.partnerBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.partnerName {
+  font-size: 1.7rem;
+}
+
+.partnerAbility {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-dim);
+}
+
+/* ---------- debut ---------- */
+
+.debut {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-lg);
+  flex-wrap: wrap;
+}
+
+.debutDate {
+  font-size: clamp(2.4rem, 6vw, 4.6rem);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- neighbours ---------- */
+
+.neighbours {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--c-line-soft);
+}
+
+.neighbour {
+  display: flex;
+  align-items: center;
+  gap: var(--s-md);
+  padding: clamp(24px, 3vw, 44px) var(--gutter);
+  background: var(--c-black);
+  transition: background var(--m-fast) var(--ease);
+}
+
+.neighbour[data-align="end"] {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.neighbour[data-align="end"] .neighbourBody {
+  align-items: flex-end;
+}
+
+.neighbour:hover {
+  background: var(--c-ink);
+}
+
+.neighbourImage {
+  width: 84px;
+  height: 108px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.neighbour:hover .neighbourImage {
+  filter: grayscale(30%) contrast(1.06) brightness(0.98);
+}
+
+.neighbourBody {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.neighbourName {
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+}
+
+.neighbourAbility {
+  font-size: var(--t-micro);
+  letter-spacing: 0.24em;
+  color: var(--c-dim);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroMedia {
+    min-height: 62vh;
+  }
+
+  .heroBody {
+    padding-block: var(--s-lg);
+  }
+
+  .abilityGrid,
+  .unitPanel {
+    grid-template-columns: 1fr;
+    gap: var(--s-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .profile {
+    grid-template-columns: 1fr;
+  }
+
+  .neighbours {
+    grid-template-columns: 1fr;
+  }
+
+  .neighbour,
+  .neighbour[data-align="end"] {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .neighbour[data-align="end"] .neighbourBody {
+    align-items: flex-start;
+  }
+}

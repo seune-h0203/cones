@@ -1,0 +1,17 @@
+{
+  "_readme": [
+    "Artist teaser videos. Drop .mp4 files into /public/videos and register them below.",
+    "Keys must match artist ids in src/data/artists.ts: rina | baesan | hyun-jizel | ham-bom.",
+    "Use the key 'project' for the campaign teaser used by the homepage WATCH TEASER button.",
+    "Only 'desktop' is required. 'mobile' should be a 9:16 cut. 'label' is shown in the player overlay.",
+    "Anything not listed here falls back to the artist poster image automatically."
+  ],
+  "_example": {
+    "rina": {
+      "desktop": "rina-teaser.mp4",
+      "mobile": "rina-teaser-mobile.mp4",
+      "label": "TEASER 01"
+    }
+  },
+  "teasers": {}
+}

@@ -1,0 +1,79 @@
+/* ==========================================================
+   CONES — DESIGN TOKENS
+   BLACK x CHROME x SILVER x WHITE
+   ========================================================== */
+
+:root {
+  /* ---- color ---- */
+  --c-black: #050506;
+  --c-ink: #0a0a0c;
+  --c-surface: #101013;
+  --c-surface-2: #17171b;
+  --c-white: #f4f4f2;
+  --c-silver: #b9bcc3;
+  --c-dim: #83868d;
+  --c-faint: #55585f;
+
+  --c-line: rgba(255, 255, 255, 0.12);
+  --c-line-soft: rgba(255, 255, 255, 0.06);
+  --c-line-strong: rgba(255, 255, 255, 0.28);
+
+  --chrome: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #c9ccd3 30%,
+    #6e7178 51%,
+    #eceef2 72%,
+    #8a8d94 100%
+  );
+  --chrome-sweep: linear-gradient(
+    75deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 100%
+  );
+
+  /* ---- type ---- */
+  --f-display: "Bebas Neue", "Inter", "Noto Sans KR", sans-serif;
+  --f-body: "Inter", "Noto Sans KR", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --t-hero: clamp(3.2rem, 9vw, 9rem);
+  --t-display: clamp(2.6rem, 6.5vw, 6rem);
+  --t-title: clamp(1.9rem, 4vw, 3.4rem);
+  --t-lead: clamp(1rem, 1.3vw, 1.15rem);
+  --t-body: 0.95rem;
+  --t-label: 0.72rem;
+  --t-micro: 0.65rem;
+
+  --ls-label: 0.32em;
+  --ls-display: 0.02em;
+
+  /* ---- space ---- */
+  --s-2xs: 4px;
+  --s-xs: 8px;
+  --s-sm: 16px;
+  --s-md: 24px;
+  --s-lg: 48px;
+  --s-xl: 96px;
+  --s-2xl: clamp(96px, 14vh, 180px);
+
+  --gutter: clamp(20px, 4vw, 64px);
+  --container: 1560px;
+  --container-narrow: 980px;
+
+  /* ---- motion ---- */
+  --m-fast: 240ms;
+  --m-normal: 600ms;
+  --m-slow: 1100ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- layers ---- */
+  --z-grain: 60;
+  --z-nav: 200;
+  --z-cursor: 400;
+  --z-modal: 600;
+  --z-transition: 800;
+  --z-loader: 900;
+}
