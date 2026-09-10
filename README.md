@@ -5,96 +5,92 @@
 FOUR MINDS. TWO ORIGINS. ONE SYSTEM.
 `PROJECT : CONNECTION : 00` — DEBUT SHOWCASE `09.15.2026`
 
-**Live site:** https://seune-h0203.github.io/cones/
+**라이브 사이트:** https://seune-h0203.github.io/cones/
 
 ---
 
-## Project Overview
+## 프로젝트 개요
 
-CONES is a fictional K-pop entertainment debut project. It is not a startup
-landing page or a student demo — it is built and treated as the official
-website of a real artist project, from its world-building down to its
-component architecture.
+CONES는 가상의 K-POP 엔터테인먼트 데뷔 프로젝트입니다. 스타트업 랜딩페이지나
+학생 데모가 아니라, 세계관부터 컴포넌트 구조까지 실제 아티스트 프로젝트의 공식
+웹사이트로 설계하고 구현했습니다.
 
-CONES is built from two independent origins that cannot complete the system
-alone:
+CONES는 서로 혼자서는 시스템을 완성할 수 없는 두 개의 독립된 기원으로 이루어져
+있습니다.
 
 | Origin | Mandate | Artists |
 | --- | --- | --- |
 | **AI UNIT** | THINK / PREDICT | SERINA (`LEARN`), BAESAN (`PREDICT`) |
 | **COMPUTER UNIT** | BUILD / EXECUTE | HYUN JIZEL (`DESIGN`), HAM BOM (`EXECUTE`) |
 
-The name itself is a compression of the concept: **CON**nect + **ONES**
-(independent beings) → *Connecting Ones.*
+이름 자체가 컨셉의 압축입니다. **CON**nect + **ONES**(독립된 존재들)
+→ *Connecting Ones.*
 
-## World
+## 세계관 (World)
 
-The site's world-building lives on `/world` as its own page rather than a
-paragraph of copy. It stages the founding idea as a sequence, driven by
-scroll position:
+세계관은 한 문단의 설명이 아니라 `/world`라는 독립된 페이지로 존재합니다.
+창설의 순간을 스크롤 진행도에 따라 전개되는 시퀀스로 연출합니다.
 
 ```
 O        O   →   O + O   →   ∞   →   CONES
 AI UNIT      COMPUTER UNIT
 ```
 
-Two circles (the two origins) converge into an overlap, resolve into an
-infinity mark, and reveal the wordmark — implemented as one scroll-linked SVG
-(`ConnectionSequence`), not a canned video. The same page renders the system
-cycle that keeps the world running:
+두 개의 원(두 기원)이 서로 수렴해 겹치고, 무한대 기호로 수렴한 뒤, 워드마크가
+드러납니다. 미리 만들어둔 영상이 아니라 스크롤에 연동된 하나의 SVG
+(`ConnectionSequence`)로 구현했습니다. 같은 페이지에서 이 세계를 계속 돌아가게
+하는 시스템 순환도 함께 렌더링합니다.
 
 ```
 LEARN → PREDICT → DESIGN → EXECUTE → LEARN → … → ∞
 ```
 
-`SystemCycle` renders this as four connected nodes, each linking straight to
-the artist who owns that ability, so the world page and the artist roster
-stay one connected story instead of two disconnected sections.
+`SystemCycle`은 이를 네 개의 연결된 노드로 렌더링하고, 각 노드는 해당 ABILITY를
+가진 아티스트로 바로 연결됩니다. 덕분에 세계관 페이지와 아티스트 로스터가 서로
+끊긴 두 섹션이 아니라 하나의 이어진 이야기로 남습니다.
 
-## Artists
+## 아티스트 (Artists)
 
-Every artist is a data record, not a hand-built page. Adding, correcting, or
-retiring an artist is a single edit to `src/data/artists.ts` — the roster,
-filters, routing, detail template, SEO/OG tags, and prev/next navigation all
-follow automatically.
+모든 아티스트는 직접 만든 페이지가 아니라 하나의 데이터 레코드입니다. 아티스트를
+추가·수정·제외하려면 `src/data/artists.ts` 한 곳만 고치면 되고, 로스터·필터·
+라우팅·상세 템플릿·SEO/OG 태그·이전/다음 네비게이션이 모두 자동으로 따라옵니다.
 
-| # | Stage name | Real name | Unit | Ability | Position |
+| # | Stage name | 본명 | Unit | Ability | Position |
 | --- | --- | --- | --- | --- | --- |
 | 01 | **SERINA** (세리나) | 박세린 | AI UNIT | LEARN | MAIN DESIGNER |
 | 02 | **BAESAN** (배산) | 배정호 | AI UNIT | PREDICT | MARKETING |
 | 03 | **HYUN JIZEL** (현지젤) | 현세은 | COMPUTER UNIT | DESIGN | MAIN PLANNER |
 | 04 | **HAM BOM** (함봄) | 함채림 | COMPUTER UNIT | EXECUTE | MAIN DEVELOPER |
 
-> The `id` (`rina`), image filenames, and video manifest key for this artist
-> stay `rina` for backward compatibility with existing routes/assets — every
-> UI surface (roster, detail page, OG image, `<title>`) now reads
-> **SERINA / 세리나**.
+> 이 아티스트의 `id`(`rina`), 이미지 파일명, 비디오 manifest 키는 기존 라우트 및
+> 에셋과의 호환을 위해 `rina`로 유지합니다. 화면에 노출되는 모든 영역(로스터,
+> 상세 페이지, OG 이미지, `<title>`)은 **SERINA / 세리나**로 표기됩니다.
 
-Each artist detail page (`/artists/:id`) shares one template but reads as a
-distinct identity, because the `ability` field drives a dedicated visual
-motif (`AbilityMotif`):
+각 아티스트 상세 페이지(`/artists/:id`)는 하나의 템플릿을 공유하지만 서로 다른
+정체성으로 읽힙니다. `ability` 필드가 전용 비주얼 모티프(`AbilityMotif`)를
+결정하기 때문입니다.
 
-| Ability | Visual language |
+| Ability | 비주얼 언어 |
 | --- | --- |
-| LEARN | data points, scanning line, observation |
-| PREDICT | a single origin branching into futures |
-| DESIGN | blueprint frames, guides, structure |
-| EXECUTE | activating bars, a running pointer |
+| LEARN | 데이터 포인트, 스캐닝 라인, 관측 |
+| PREDICT | 하나의 기원에서 갈라져 나가는 미래들 |
+| DESIGN | 블루프린트 프레임, 가이드, 구조 |
+| EXECUTE | 활성화되는 바, 움직이는 포인터 |
 
-Each artist also carries their own teaser slot (see **Teaser Video System**
-below) — the detail page always plays *that* artist's teaser, never a shared
-default.
+각 아티스트는 자신만의 티저 슬롯도 가집니다(아래 **티저 비디오 시스템** 참고).
+상세 페이지는 언제나 *그 아티스트의* 티저를 재생하며, 공용 기본 영상을 쓰지
+않습니다.
 
 ## Connection : 00
 
-`/project` documents CONES' debut release, `CONNECTION : 00` — the moment the
-two origins are proven to interoperate. `00` reads as two circles and as "not
-yet decided," which is why the page repeats the same visual grammar as
-`/world`'s founding sequence rather than introducing new iconography. The
-page's countdown and status line are driven by the same `useCountdown` hook
-as the homepage, so `COMING SOON` and `NOW LIVE` never fall out of sync.
+`/project`는 CONES의 데뷔 릴리즈인 `CONNECTION : 00`을 기록합니다. 두 기원이
+서로 맞물려 동작한다는 것이 증명되는 순간입니다. `00`은 두 개의 원이자 "아직
+아무것도 정해지지 않았다"는 뜻으로 읽히며, 그래서 이 페이지는 새로운 아이코노그래피를
+꺼내지 않고 `/world`의 창설 시퀀스와 같은 시각 문법을 반복합니다. 페이지의
+카운트다운과 상태 라인은 홈과 동일한 `useCountdown` 훅으로 구동되므로
+`COMING SOON`과 `NOW LIVE`가 서로 어긋나지 않습니다.
 
-## Information Architecture
+## 정보 구조 (Information Architecture)
 
 ```
 /                    HOME       — hero, countdown, origins, artist grid, connection, project, CTA
@@ -106,14 +102,14 @@ as the homepage, so `COMING SOON` and `NOW LIVE` never fall out of sync.
 *                    NOT FOUND  — "SYSTEM NOT FOUND" — never a browser default 404
 ```
 
-Routing uses `HashRouter`, so every one of these paths is a plain static
-file request underneath — refreshing or deep-linking to `/artists/rina` on
-GitHub Pages never 404s, with no server rewrite rules required.
+라우팅은 `HashRouter`를 사용합니다. 따라서 위 모든 경로가 내부적으로는 평범한
+정적 파일 요청이며, GitHub Pages에서 `/artists/rina`로 새로고침하거나 딥링크로
+접근해도 404가 나지 않습니다. 서버 rewrite 규칙도 필요 없습니다.
 
-## Technical Architecture
+## 기술 구조 (Technical Architecture)
 
-React 19 + TypeScript (strict) + Vite. No UI or animation library — every
-interaction below is native CSS/DOM/SVG.
+React 19 + TypeScript (strict) + Vite. UI·애니메이션 라이브러리를 쓰지 않았고,
+아래의 모든 인터랙션은 네이티브 CSS/DOM/SVG로 구현했습니다.
 
 ```
 src/
@@ -122,27 +118,27 @@ src/
 │                AbilityMotif, LoadingScreen, PageTransition, CustomCursor,
 │                EasterEgg, Footer, Reveal, SectionHeader …
 ├─ pages/        Home, World, Artists, ArtistDetail, Project, About, NotFound
-├─ data/         artists.ts (single source of truth), site.ts (brand, debut
-│                date, unit copy, system cycle)
+├─ data/         artists.ts (단일 소스), site.ts (브랜드, 데뷔 일자,
+│                유닛 카피, 시스템 순환)
 ├─ hooks/        useCountdown, useInView, useScrollProgress, useTeaser,
 │                useSeo, useFocusTrap / useScrollLock, useMedia
-├─ utils/        asset.ts (deployment-safe path resolution), analytics.ts
-└─ styles/       tokens.css (design tokens), global.css (primitives)
+├─ utils/        asset.ts (배포 환경에 안전한 경로 해석), analytics.ts
+└─ styles/       tokens.css (디자인 토큰), global.css (프리미티브)
 
 public/
-├─ images/       artist portraits · 16:9 teaser posters · OG cards · logo
-└─ videos/       teaser files + manifest.json (see below)
+├─ images/       아티스트 포트레이트 · 16:9 티저 포스터 · OG 카드 · 로고
+└─ videos/       티저 파일 + manifest.json (아래 참고)
 ```
 
-Design tokens (`src/styles/tokens.css`) centralize color, type, spacing, and
-motion — `--c-black`, `--c-white`, `--c-silver`, the `--chrome` gradient,
-`--f-display` (Bebas Neue), `--f-body` (Inter / Noto Sans KR), `--f-mono`
-(JetBrains Mono), and the `--m-*` / `--ease*` motion scale. Components read
-these tokens rather than hard-coding values.
+디자인 토큰(`src/styles/tokens.css`)이 색·타이포·간격·모션을 한곳에서 관리합니다.
+`--c-black`, `--c-white`, `--c-silver`, `--chrome` 그라디언트, `--f-display`
+(Bebas Neue), `--f-body`(Inter / Noto Sans KR), `--f-mono`(JetBrains Mono),
+그리고 `--m-*` / `--ease*` 모션 스케일이 여기에 있습니다. 컴포넌트는 값을
+하드코딩하지 않고 이 토큰을 참조합니다.
 
-### Teaser Video System
+### 티저 비디오 시스템
 
-Every artist owns a teaser slot, declared in `public/videos/manifest.json`:
+모든 아티스트는 `public/videos/manifest.json`에 선언된 티저 슬롯을 가집니다.
 
 ```json
 {
@@ -156,102 +152,100 @@ Every artist owns a teaser slot, declared in `public/videos/manifest.json`:
 }
 ```
 
-- `desktop` is required; `mobile` (a 9:16 cut) is selected automatically on
-  narrow viewports.
-- The homepage's `WATCH TEASER` button reads the `project` key.
-- **No file is invented.** An artist without a manifest entry renders their
-  real portrait as a poster with a `SIGNAL PENDING` state — never a fake or
-  placeholder video.
-- Playback is `muted`, `playsInline`, `preload="metadata"`, with a real
-  poster frame; nothing autoplays with sound.
-- An `IntersectionObserver` starts playback only once a player scrolls into
-  view and pauses it the moment it leaves — no more than one teaser is ever
-  decoding at a time, and nothing is fetched until it's needed.
-- The custom control bar (play/pause, scrub, mute, fullscreen) is native
-  `<video>` underneath, so keyboard and screen-reader users get real media
-  semantics, not a div pretending to be a player.
+- `desktop`은 필수이며, `mobile`(9:16 컷)은 좁은 뷰포트에서 자동으로 선택됩니다.
+- 홈의 `WATCH TEASER` 버튼은 `project` 키를 참조합니다.
+- **없는 파일을 지어내지 않습니다.** manifest에 등록되지 않은 아티스트는 실제
+  포트레이트를 포스터로 띄우고 `SIGNAL PENDING` 상태로 표시합니다. 가짜 영상이나
+  플레이스홀더 영상을 쓰지 않습니다.
+- 재생은 `muted`, `playsInline`, `preload="metadata"`이며 실제 포스터 프레임을
+  사용합니다. 소리와 함께 자동 재생되는 것은 없습니다.
+- `IntersectionObserver`가 플레이어가 화면에 들어올 때만 재생을 시작하고 벗어나는
+  즉시 정지시킵니다. 동시에 두 개 이상의 티저가 디코딩되지 않으며, 필요해지기
+  전까지 아무것도 내려받지 않습니다.
+- 커스텀 컨트롤 바(재생/정지, 탐색, 음소거, 전체화면)는 내부적으로 네이티브
+  `<video>`입니다. 따라서 키보드·스크린리더 사용자도 div로 흉내 낸 플레이어가
+  아니라 실제 미디어 시맨틱을 얻습니다.
 
-## Interaction
+## 인터랙션 (Interaction)
 
-- **Scroll reveal** — `Reveal` / `useInView`, applied section by section.
-- **Founding sequence** — `ConnectionSequence`: scroll-position drives two
-  SVG circles into an infinity mark and the wordmark, no video required.
-- **System cycle** — `SystemCycle`: LEARN → PREDICT → DESIGN → EXECUTE nodes
-  connect into a loop as they enter view.
-- **Ability motifs** — per-artist SVG language (see **Artists**).
-- **Logo mark** — `LogoMark`: a power-on wipe reveal, a chrome highlight
-  swept across the wordmark's own alpha silhouette, and a breathing glow —
-  all disabled under `prefers-reduced-motion`.
-- **Cursor-following micro interaction** — `CustomCursor`, desktop
-  (`hover: hover` + `pointer: fine`) only; touch devices never see it.
-- **Page transitions** — a chrome-line wipe between routes.
-- **Video modal** — focus-trapped, `Escape` closes and returns focus to the
-  trigger, background scroll is locked while open.
-- **Easter egg** — one subtle, undocumented interaction. It exists; it isn't
-  advertised here.
+- **스크롤 리빌** — `Reveal` / `useInView`를 섹션 단위로 적용.
+- **창설 시퀀스** — `ConnectionSequence`: 스크롤 위치가 두 개의 SVG 원을 무한대
+  기호와 워드마크로 이끕니다. 영상이 필요 없습니다.
+- **시스템 순환** — `SystemCycle`: LEARN → PREDICT → DESIGN → EXECUTE 노드가
+  화면에 들어오면서 하나의 루프로 연결됩니다.
+- **Ability 모티프** — 아티스트별 SVG 언어(**아티스트** 항목 참고).
+- **로고 마크** — `LogoMark`: 전원이 켜지는 듯한 와이프 리빌, 워드마크 자체의
+  알파 실루엣을 따라 흐르는 크롬 하이라이트, 그리고 숨 쉬듯 번지는 글로우.
+  `prefers-reduced-motion`에서는 모두 비활성화됩니다.
+- **커서 추종 마이크로 인터랙션** — `CustomCursor`. 데스크톱(`hover: hover` +
+  `pointer: fine`)에서만 동작하며, 터치 디바이스에는 나타나지 않습니다.
+- **페이지 전환** — 라우트 사이를 지나가는 크롬 라인 와이프.
+- **비디오 모달** — 포커스 트랩이 걸리고, `Escape`로 닫으면 포커스가 트리거로
+  돌아오며, 열려 있는 동안 배경 스크롤이 잠깁니다.
+- **이스터에그** — 문서화하지 않은 은근한 인터랙션이 하나 있습니다. 존재하지만
+  여기에 적어두지는 않습니다.
 
-Nothing above is decorative for its own sake — every animation marks a state
-change (a section entering view, a route changing, an ability being
-explained), and `prefers-reduced-motion` strips the motion back to instant
-state changes everywhere it's checked.
+위의 어떤 것도 장식을 위한 장식이 아닙니다. 모든 애니메이션은 상태 변화(섹션이
+화면에 들어옴, 라우트가 바뀜, ABILITY가 설명됨)를 나타내며,
+`prefers-reduced-motion`이 확인되는 모든 지점에서 모션은 즉각적인 상태 변화로
+축소됩니다.
 
-## Performance
+## 성능 (Performance)
 
-- Route-level code splitting (`React.lazy` per page) — the initial bundle is
-  the shell, not every page.
-- Images are served through `srcset` (portrait + downscaled variant) with
-  `loading="lazy"` off the critical path.
-- Video never preloads beyond `metadata`, uses a real poster frame, and only
-  one instance plays at a time (see **Teaser Video System**).
-- Zero UI/animation dependencies — `react`, `react-dom`, and
-  `react-router-dom` are the entire runtime dependency list.
-- `vite.config.ts` builds with `base: "./"`, so every asset resolves as a
-  relative URL — the same build works unmodified from a domain root or a
-  GitHub Pages project sub-path.
+- 라우트 단위 코드 스플리팅(페이지별 `React.lazy`). 최초 번들은 전체 페이지가
+  아니라 셸입니다.
+- 이미지는 `srcset`(포트레이트 + 축소 변형)으로 제공되며, 크리티컬 패스 밖에서는
+  `loading="lazy"`가 적용됩니다.
+- 영상은 `metadata` 이상으로 미리 불러오지 않고, 실제 포스터 프레임을 사용하며,
+  한 번에 하나만 재생됩니다(**티저 비디오 시스템** 참고).
+- UI·애니메이션 의존성이 0입니다. 런타임 의존성은 `react`, `react-dom`,
+  `react-router-dom`이 전부입니다.
+- `vite.config.ts`가 `base: "./"`로 빌드하므로 모든 에셋이 상대 URL로 해석됩니다.
+  같은 빌드 결과물이 도메인 루트에서도, GitHub Pages 프로젝트 하위 경로에서도
+  수정 없이 동작합니다.
 
-## Accessibility
+## 접근성 (Accessibility)
 
-- Semantic landmarks (`header`, `nav`, `main`, `footer`), one `<h1>` per
-  route, real `<button>` / `<a>` elements — no clickable `<div>`s standing in
-  for interactive controls.
-- `alt` text on every meaningful image; decorative marks are `aria-hidden`.
-- Focus is visible everywhere (`:focus-visible`), and the video modal traps
-  focus while open and restores it to the trigger on close.
-- `Escape` closes the video modal and the mobile menu.
-- A skip-to-content link is the first focusable element on every page.
-- `prefers-reduced-motion: reduce` collapses every animation to its resting
-  state — the scroll-driven founding sequence included.
+- 시맨틱 랜드마크(`header`, `nav`, `main`, `footer`), 라우트당 하나의 `<h1>`,
+  실제 `<button>` / `<a>` 요소를 사용합니다. 인터랙티브 컨트롤을 대신하는 클릭
+  가능한 `<div>`는 없습니다.
+- 의미 있는 모든 이미지에 `alt` 텍스트가 있고, 장식 요소는 `aria-hidden`입니다.
+- 포커스는 어디서나 보이며(`:focus-visible`), 비디오 모달은 열려 있는 동안 포커스를
+  가두고 닫을 때 트리거로 되돌립니다.
+- `Escape`로 비디오 모달과 모바일 메뉴를 닫습니다.
+- 본문 바로가기(skip-to-content) 링크가 모든 페이지의 첫 번째 포커스 대상입니다.
+- `prefers-reduced-motion: reduce`는 스크롤 기반 창설 시퀀스를 포함한 모든
+  애니메이션을 정지 상태로 축소합니다.
 
-## Deployment
+## 배포 (Deployment)
 
-Repository: **[seune-h0203/cones](https://github.com/seune-h0203/cones)**
-Live URL: **https://seune-h0203.github.io/cones/**
+저장소: **[seune-h0203/cones](https://github.com/seune-h0203/cones)**
+라이브 URL: **https://seune-h0203.github.io/cones/**
 
-Build is fully static (Vite → `dist/`) and ships with
-`.github/workflows/deploy.yml`, which builds and publishes to **GitHub
-Pages** via `actions/deploy-pages` on every push to `main`.
+빌드 결과물은 완전한 정적 파일(Vite → `dist/`)이며,
+`.github/workflows/deploy.yml`이 함께 포함되어 있습니다. 이 워크플로가 `main`에
+푸시될 때마다 빌드 후 `actions/deploy-pages`를 통해 **GitHub Pages**로 배포합니다.
 
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # tsc --noEmit + production build → dist/
-npm run preview    # serve the production build locally
+npm run build      # tsc --noEmit + 프로덕션 빌드 → dist/
+npm run preview    # 프로덕션 빌드를 로컬에서 서빙
 ```
 
-Repository setup, once, in **Settings → Pages → Source → GitHub Actions**.
-No server configuration is required beyond that:
+저장소 설정은 **Settings → Pages → Source → GitHub Actions**에서 한 번만 하면
+됩니다. 그 외의 서버 설정은 필요하지 않습니다.
 
-- `base: "./"` in `vite.config.ts` keeps every asset path relative, so the
-  build is correct whether it's served from a domain root or a project
-  sub-path — nothing to hand-edit per repository.
-- `HashRouter` means GitHub Pages' static file server can serve any deep
-  link or refresh without a custom 404/rewrite trick.
+- `vite.config.ts`의 `base: "./"`가 모든 에셋 경로를 상대 경로로 유지하므로,
+  도메인 루트에서 서빙하든 프로젝트 하위 경로에서 서빙하든 빌드가 그대로
+  올바르게 동작합니다. 저장소마다 손으로 고칠 것이 없습니다.
+- `HashRouter` 덕분에 GitHub Pages의 정적 파일 서버가 별도의 404/rewrite 트릭
+  없이도 모든 딥링크와 새로고침을 처리할 수 있습니다.
 
-## Team 02
+## TEAM 02
 
-CONES is produced by **TEAM 02** — the same four people behind the artist
-roster. Each member's production role and their on-site `ABILITY` are the
-same mapping:
+CONES는 **TEAM 02**가 제작합니다. 아티스트 로스터의 그 네 사람과 같은 팀이며,
+각 멤버의 제작 역할과 사이트 상의 `ABILITY`는 그대로 대응됩니다.
 
 - **HYUN JIZEL** — MAIN PLANNER → `DESIGN`
 - **HAM BOM** — MAIN DEVELOPER → `EXECUTE`
