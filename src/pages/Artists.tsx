@@ -20,7 +20,7 @@ export default function Artists() {
 
   useSeo({
     title: "CONES — ARTISTS",
-    description: "CONES ARTISTS. 04 ARTISTS · 02 UNITS. RINA, BAESAN, HYUN JIZEL, HAM BOM.",
+    description: "CONES ARTISTS. 04 ARTISTS · 02 UNITS. SERINA, BAESAN, HYUN JIZEL, HAM BOM.",
     image: "images/og/default.jpg",
   });
 

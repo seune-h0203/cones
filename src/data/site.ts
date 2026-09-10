@@ -54,7 +54,7 @@ export const UNITS: Record<UnitInfo["id"], UnitInfo> = {
 };
 
 export const CYCLE = [
-  { ability: "LEARN", unit: "AI UNIT", artist: "RINA" },
+  { ability: "LEARN", unit: "AI UNIT", artist: "SERINA" },
   { ability: "PREDICT", unit: "AI UNIT", artist: "BAESAN" },
   { ability: "DESIGN", unit: "COMPUTER UNIT", artist: "HYUN JIZEL" },
   { ability: "EXECUTE", unit: "COMPUTER UNIT", artist: "HAM BOM" },

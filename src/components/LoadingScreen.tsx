@@ -1,32 +1,35 @@
 import { useEffect, useState } from "react";
-import { SITE } from "../data/site";
 import { useScrollLock } from "../hooks/useFocusTrap";
-import { LogoMark } from "./LogoMark";
+import { useReducedMotion } from "../hooks/useMedia";
+import { BootSequence } from "./BootSequence";
 import styles from "./overlays.module.css";
 
-const MIN_VISIBLE = 900;
-const MAX_VISIBLE = 2400;
-const STEPS = ["CONNECTING ORIGINS", "SYNCING ARTISTS", "ESTABLISHING CONNECTION", "CONES"];
+// The boot choreography (O O -> infinity -> CONES, see BootSequence.module.css)
+// is scripted to land at 5s, so the screen must stay up at least that long —
+// but a stalled load must never trap the visitor past MAX_VISIBLE. Under
+// prefers-reduced-motion the sequence is skipped, so there's nothing to wait for.
+const MIN_VISIBLE = 5100;
+const MAX_VISIBLE = 6800;
+const MIN_VISIBLE_REDUCED = 300;
+const MAX_VISIBLE_REDUCED = 1200;
 
 /** Branded boot sequence. Always releases the page — never traps the visitor. */
 export function LoadingScreen() {
+  const reduced = useReducedMotion();
   const [ready, setReady] = useState(false);
   const [removed, setRemoved] = useState(false);
-  const [step, setStep] = useState(0);
 
   useScrollLock(!removed);
 
   useEffect(() => {
+    const minVisible = reduced ? MIN_VISIBLE_REDUCED : MIN_VISIBLE;
+    const maxVisible = reduced ? MAX_VISIBLE_REDUCED : MAX_VISIBLE;
     const started = Date.now();
     let releaseTimer = 0;
 
-    const stepTimer = window.setInterval(() => {
-      setStep((value) => Math.min(STEPS.length, value + 1));
-    }, 240);
-
     const release = () => {
       const waited = Date.now() - started;
-      releaseTimer = window.setTimeout(() => setReady(true), Math.max(0, MIN_VISIBLE - waited));
+      releaseTimer = window.setTimeout(() => setReady(true), Math.max(0, minVisible - waited));
     };
 
     if (document.readyState === "complete") {
@@ -35,15 +38,14 @@ export function LoadingScreen() {
       window.addEventListener("load", release, { once: true });
     }
 
-    const hardStop = window.setTimeout(() => setReady(true), MAX_VISIBLE);
+    const hardStop = window.setTimeout(() => setReady(true), maxVisible);
 
     return () => {
-      window.clearInterval(stepTimer);
       window.clearTimeout(hardStop);
       window.clearTimeout(releaseTimer);
       window.removeEventListener("load", release);
     };
-  }, []);
+  }, [reduced]);
 
   useEffect(() => {
     if (!ready) return;
@@ -56,25 +58,10 @@ export function LoadingScreen() {
   return (
     <div className={styles.loader} data-ready={ready}>
       <div className={styles.loaderInner}>
-        <LogoMark
-          alt={SITE.name}
-          className={styles.loaderLogo}
-          width={360}
-          height={64}
-          shine
-          pulse
-        />
-        <p className={`u-kicker ${styles.loaderStatus}`} role="status">
+        <BootSequence />
+        <p className="u-sr-only" role="status">
           {ready ? "SYSTEM READY" : "SYSTEM INITIALIZING…"}
         </p>
-        <ul className={styles.steps} aria-hidden="true">
-          {STEPS.map((label, i) => (
-            <li key={label} className={styles.step} data-on={ready || i < step}>
-              <span className={`u-mono ${styles.stepIndex}`}>{String(i + 1).padStart(2, "0")}</span>
-              <span className={`u-mono ${styles.stepLabel}`}>{label}</span>
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );

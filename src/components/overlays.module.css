@@ -25,49 +25,6 @@
   padding: var(--gutter);
 }
 
-.loaderLogo {
-  width: min(360px, 66vw);
-}
-
-.loaderStatus {
-  color: var(--c-dim);
-}
-
-.steps {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 9px;
-  margin-top: 4px;
-}
-
-.step {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: var(--t-micro);
-  letter-spacing: 0.2em;
-  opacity: 0.28;
-  transition: opacity var(--m-fast) var(--ease);
-}
-
-.step[data-on="true"] {
-  opacity: 1;
-}
-
-.stepIndex {
-  color: var(--c-faint);
-}
-
-.stepLabel {
-  color: var(--c-silver);
-  transition: color var(--m-fast) var(--ease);
-}
-
-.step[data-on="true"] .stepLabel {
-  color: var(--c-white);
-}
-
 /* ---------- page transition ---------- */
 
 .transition {

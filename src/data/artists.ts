@@ -51,8 +51,8 @@ export const ARTISTS: Artist[] = [
   {
     id: "rina",
     index: "01",
-    stageName: "RINA",
-    koreanName: "리나",
+    stageName: "SERINA",
+    koreanName: "세리나",
     realName: "박세린",
     unit: "ai",
     ability: "LEARN",

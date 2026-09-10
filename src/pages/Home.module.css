@@ -50,7 +50,7 @@
 }
 
 .heroLogo {
-  width: min(760px, 86vw);
+  width: clamp(240px, 86vw, 1360px);
   transform: translate3d(var(--px, 0), var(--py, 0), 0);
   transition: transform 700ms var(--ease);
 }
@@ -254,7 +254,7 @@
 }
 
 .finalLogo {
-  width: min(460px, 72vw);
+  width: clamp(200px, 40vw, 760px);
   height: auto;
   margin-inline: auto;
 }

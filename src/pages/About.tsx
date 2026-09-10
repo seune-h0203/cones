@@ -71,10 +71,23 @@ export default function About() {
 
       <section className={`u-section ${styles.section}`}>
         <div className="u-container">
-          <SectionHeader index="02" kicker="LEADERSHIP" title={COMPANY.role} compact />
-          <Reveal className={styles.leadership}>
-            <p className={`u-display ${styles.leadershipName}`}>{COMPANY.name}</p>
-            <p className={`u-mono ${styles.leadershipRole}`}>{COMPANY.role} — CONES</p>
+          <SectionHeader index="02" kicker="LEADERSHIP" title="DIRECTOR" compact />
+          <Reveal className={styles.director}>
+            <div className={styles.directorMedia}>
+              <img
+                className={styles.directorImage}
+                src={asset("images/director-portrait.jpg")}
+                srcSet={`${asset("images/director-portrait-sm.jpg")} 480w, ${asset("images/director-portrait.jpg")} 589w`}
+                sizes="(max-width: 900px) 80vw, 38vw"
+                alt={`${COMPANY.name} — ${COMPANY.role}`}
+                decoding="async"
+              />
+            </div>
+            <div className={styles.directorBody}>
+              <p className="u-kicker">DIRECTOR</p>
+              <p className={`u-display ${styles.directorName}`}>{COMPANY.name}</p>
+              <p className={`u-mono ${styles.directorRole}`}>{COMPANY.role} — CONES</p>
+            </div>
           </Reveal>
         </div>
       </section>

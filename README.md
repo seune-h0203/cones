@@ -21,7 +21,7 @@ alone:
 
 | Origin | Mandate | Artists |
 | --- | --- | --- |
-| **AI UNIT** | THINK / PREDICT | RINA (`LEARN`), BAESAN (`PREDICT`) |
+| **AI UNIT** | THINK / PREDICT | SERINA (`LEARN`), BAESAN (`PREDICT`) |
 | **COMPUTER UNIT** | BUILD / EXECUTE | HYUN JIZEL (`DESIGN`), HAM BOM (`EXECUTE`) |
 
 The name itself is a compression of the concept: **CON**nect + **ONES**
@@ -60,14 +60,15 @@ follow automatically.
 
 | # | Stage name | Real name | Unit | Ability | Position |
 | --- | --- | --- | --- | --- | --- |
-| 01 | **RINA** (리나) | 박세린 | AI UNIT | LEARN | MAIN DESIGNER |
+| 01 | **SERINA** (세리나) | 박세린 | AI UNIT | LEARN | MAIN DESIGNER |
 | 02 | **BAESAN** (배산) | 배정호 | AI UNIT | PREDICT | MARKETING |
 | 03 | **HYUN JIZEL** (현지젤) | 현세은 | COMPUTER UNIT | DESIGN | MAIN PLANNER |
 | 04 | **HAM BOM** (함봄) | 함채림 | COMPUTER UNIT | EXECUTE | MAIN DEVELOPER |
 
-> The image asset for RINA is filed as `serina` for historical reasons — the
-> UI never renders that name. Every surface (roster, detail page, OG image,
-> `<title>`) reads **RINA / 리나**.
+> The `id` (`rina`), image filenames, and video manifest key for this artist
+> stay `rina` for backward compatibility with existing routes/assets — every
+> UI surface (roster, detail page, OG image, `<title>`) now reads
+> **SERINA / 세리나**.
 
 Each artist detail page (`/artists/:id`) shares one template but reads as a
 distinct identity, because the `ability` field drives a dedicated visual
@@ -254,7 +255,7 @@ same mapping:
 
 - **HYUN JIZEL** — MAIN PLANNER → `DESIGN`
 - **HAM BOM** — MAIN DEVELOPER → `EXECUTE`
-- **RINA** — MAIN DESIGNER → `LEARN`
+- **SERINA** — MAIN DESIGNER → `LEARN`
 - **BAESAN** — MARKETING → `PREDICT`
 
 CEO / DIRECTOR — 김남주

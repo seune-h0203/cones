@@ -13,5 +13,9 @@
       "label": "TEASER 01"
     }
   },
-  "teasers": {}
+  "teasers": {
+    "baesan": {
+      "desktop": "baesan-teaser.mp4"
+    }
+  }
 }
