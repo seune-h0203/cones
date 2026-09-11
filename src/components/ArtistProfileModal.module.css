@@ -1,0 +1,71 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgba(5, 5, 6, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.panel {
+  position: relative;
+  width: min(100%, 1100px);
+  max-height: min(88svh, 820px);
+  overflow: auto;
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--c-ink);
+  border: 1px solid var(--c-line-strong);
+  box-shadow: 0 24px 100px rgba(0, 0, 0, 0.55);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 1;
+  font-family: var(--f-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.18em;
+  color: var(--c-dim);
+}
+
+.close:hover { color: var(--c-white); }
+
+.identity {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) 1fr;
+  gap: clamp(24px, 5vw, 72px);
+  align-items: end;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: contrast(1.06) saturate(1.08);
+}
+
+.heading { padding-bottom: 8px; }
+.name { margin-top: 14px; font-size: clamp(3.2rem, 9vw, 7.5rem); }
+.ability { margin-top: 18px; color: var(--c-silver); font-size: var(--t-label); }
+.quote { margin: 24px 0 30px; color: var(--c-dim); max-width: 36ch; }
+.details { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); margin-top: clamp(32px, 6vw, 72px); padding-top: 28px; border-top: 1px solid var(--c-line-soft); }
+.abilityLine { color: var(--c-silver); font-size: var(--t-micro); }
+.detailKicker { color: var(--c-white); }
+.body { margin-top: 14px; color: var(--c-dim); max-width: 42ch; }
+.profile { margin-top: 28px; border-top: 1px solid var(--c-line-soft); }
+.profile div { display: grid; grid-template-columns: 1fr 1.3fr; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--c-line-soft); }
+.profile dt { color: var(--c-faint); font-size: var(--t-micro); }
+.profile dd { color: var(--c-silver); }
+
+@media (max-width: 680px) {
+  .modal { padding: 0; align-items: end; }
+  .panel { max-height: 94svh; padding: 52px 20px 28px; }
+  .identity, .details { grid-template-columns: 1fr; }
+  .image { max-height: 42svh; }
+  .name { font-size: clamp(3rem, 17vw, 5.2rem); }
+  .details { gap: 28px; }
+}

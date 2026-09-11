@@ -19,11 +19,11 @@ export const DEBUT_DATE = new Date(2026, 8, 15, 0, 0, 0);
 export const DEBUT_LABEL = "09.15.2026";
 
 export const NAV = [
-  { label: "HOME", path: "/" },
-  { label: "WORLD", path: "/world" },
-  { label: "ARTISTS", path: "/artists" },
-  { label: "PROJECT", path: "/project" },
-  { label: "ABOUT", path: "/about" },
+  { label: "ORIGINS", path: "#origins" },
+  { label: "SYSTEM", path: "#system" },
+  { label: "ARTISTS", path: "#artists" },
+  { label: "PROJECT", path: "#project" },
+  { label: "TEAM", path: "#team" },
 ] as const;
 
 export interface UnitInfo {

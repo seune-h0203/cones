@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { DEBUT_LABEL, NAV, SITE } from "../data/site";
 import { asset } from "../utils/asset";
 import styles from "./Footer.module.css";
@@ -21,9 +20,9 @@ export function Footer() {
 
         <nav className={styles.nav} aria-label="푸터 메뉴">
           {NAV.map((item) => (
-            <Link key={item.path} to={item.path} className={`u-mono ${styles.link}`}>
+            <a key={item.path} href={item.path} className={`u-mono ${styles.link}`}>
               {item.label}
-            </Link>
+            </a>
           ))}
         </nav>
 

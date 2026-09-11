@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import type { Artist } from "../data/artists";
 import { UNITS } from "../data/site";
 import { asset } from "../utils/asset";
@@ -8,15 +7,17 @@ interface Props {
   artist: Artist;
   /** first visible panel loads eagerly, the rest lazily */
   priority?: boolean;
+  onSelect?: (artist: Artist) => void;
 }
 
-export function ArtistCard({ artist, priority = false }: Props) {
+export function ArtistCard({ artist, priority = false, onSelect }: Props) {
   return (
-    <Link
-      to={`/artists/${artist.id}`}
+    <button
+      type="button"
       className={styles.card}
       data-cursor="view"
       aria-label={`${artist.stageName} 프로필 보기`}
+      onClick={() => onSelect?.(artist)}
     >
       <div className={styles.media}>
         <img
@@ -45,6 +46,6 @@ export function ArtistCard({ artist, priority = false }: Props) {
           VIEW PROFILE <span className="u-arrow">→</span>
         </span>
       </div>
-    </Link>
+    </button>
   );
 }

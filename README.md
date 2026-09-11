@@ -28,8 +28,8 @@ CONES는 서로 혼자서는 시스템을 완성할 수 없는 두 개의 독립
 
 ## 세계관 (World)
 
-세계관은 한 문단의 설명이 아니라 `/world`라는 독립된 페이지로 존재합니다.
-창설의 순간을 스크롤 진행도에 따라 전개되는 시퀀스로 연출합니다.
+세계관은 `/` 안의 ORIGINS → CONNECTION → SYSTEM 섹션으로 이어집니다.
+창설의 순간은 스크롤 진행도에 따라 전개되는 시퀀스로 연출합니다.
 
 ```
 O        O   →   O + O   →   ∞   →   CONES
@@ -66,8 +66,8 @@ LEARN → PREDICT → DESIGN → EXECUTE → LEARN → … → ∞
 > 에셋과의 호환을 위해 `rina`로 유지합니다. 화면에 노출되는 모든 영역(로스터,
 > 상세 페이지, OG 이미지, `<title>`)은 **SERINA / 세리나**로 표기됩니다.
 
-각 아티스트 상세 페이지(`/artists/:id`)는 하나의 템플릿을 공유하지만 서로 다른
-정체성으로 읽힙니다. `ability` 필드가 전용 비주얼 모티프(`AbilityMotif`)를
+각 아티스트 카드를 클릭하면 랜딩페이지 내부 모달에서 상세 정보가 열립니다. 서로 다른
+정체성은 `ability` 필드가 결정하는 전용 비주얼 모티프(`AbilityMotif`)로
 결정하기 때문입니다.
 
 | Ability | 비주얼 언어 |
@@ -83,28 +83,22 @@ LEARN → PREDICT → DESIGN → EXECUTE → LEARN → … → ∞
 
 ## Connection : 00
 
-`/project`는 CONES의 데뷔 릴리즈인 `CONNECTION : 00`을 기록합니다. 두 기원이
+`CONNECTION : 00` 섹션은 CONES의 데뷔 릴리즈를 기록합니다. 두 기원이
 서로 맞물려 동작한다는 것이 증명되는 순간입니다. `00`은 두 개의 원이자 "아직
 아무것도 정해지지 않았다"는 뜻으로 읽히며, 그래서 이 페이지는 새로운 아이코노그래피를
-꺼내지 않고 `/world`의 창설 시퀀스와 같은 시각 문법을 반복합니다. 페이지의
+꺼내지 않고 창설 시퀀스와 같은 시각 문법을 반복합니다. 페이지의
 카운트다운과 상태 라인은 홈과 동일한 `useCountdown` 훅으로 구동되므로
 `COMING SOON`과 `NOW LIVE`가 서로 어긋나지 않습니다.
 
 ## 정보 구조 (Information Architecture)
 
 ```
-/                    HOME       — hero, countdown, origins, artist grid, connection, project, CTA
-/world               WORLD      — two origins → connection → the system cycle
-/artists             ARTISTS    — full roster, unit filter (ALL / AI UNIT / COMPUTER UNIT)
-/artists/:artistId   ARTIST     — rina · baesan · hyun-jizel · ham-bom
-/project             PROJECT    — CONNECTION : 00
-/about               ABOUT      — TEAM 02, leadership, project footer
-*                    NOT FOUND  — "SYSTEM NOT FOUND" — never a browser default 404
+/                    ONE-PAGE   — hero → origins → connection → system → artists → project → team → CTA
 ```
 
-라우팅은 `HashRouter`를 사용합니다. 따라서 위 모든 경로가 내부적으로는 평범한
-정적 파일 요청이며, GitHub Pages에서 `/artists/rina`로 새로고침하거나 딥링크로
-접근해도 404가 나지 않습니다. 서버 rewrite 규칙도 필요 없습니다.
+앱 셸은 별도 route 없이 `/`에서 랜딩페이지를 렌더링합니다.
+네비게이션은 `#origins`, `#system`, `#artists`, `#project`, `#team` 앵커를 사용하며
+새 route 이동 없이 하나의 스크롤 경험을 제공합니다.
 
 ## 기술 구조 (Technical Architecture)
 
@@ -117,7 +111,7 @@ src/
 │                VideoModal, Countdown, ConnectionSequence, SystemCycle,
 │                AbilityMotif, LoadingScreen, PageTransition, CustomCursor,
 │                EasterEgg, Footer, Reveal, SectionHeader …
-├─ pages/        Home, World, Artists, ArtistDetail, Project, About, NotFound
+├─ pages/        Home, World, Artists, ArtistDetail, Project, About, NotFound (레거시 확장 모듈)
 ├─ data/         artists.ts (단일 소스), site.ts (브랜드, 데뷔 일자,
 │                유닛 카피, 시스템 순환)
 ├─ hooks/        useCountdown, useInView, useScrollProgress, useTeaser,
@@ -235,6 +229,21 @@ npm run preview    # 프로덕션 빌드를 로컬에서 서빙
 
 저장소 설정은 **Settings → Pages → Source → GitHub Actions**에서 한 번만 하면
 됩니다. 그 외의 서버 설정은 필요하지 않습니다.
+
+### 네트워크 비의존 배포
+
+외부 CDN이나 Google Fonts를 사용하지 않으므로, 한 번 의존성을 설치한 뒤 생성한 `dist/` 폴더만
+USB, 사내 서버, 정적 호스팅, 로컬 웹 서버로 옮겨 배포할 수 있습니다. 이미지와 티저 영상도
+`public/`에서 함께 복사되어 빌드에 포함됩니다.
+
+```bash
+npm run build:offline
+npm run serve:dist
+```
+
+빌드가 끝나면 `dist/`가 독립적인 정적 배포본입니다. `dist/`를 정적 파일 서버의 공개 폴더로
+지정하면 인터넷 연결 없이도 CONES가 동작합니다. 브라우저 보안 정책상 `index.html`을
+`file://`로 직접 여는 대신 작은 정적 서버를 사용해야 합니다.
 
 - `vite.config.ts`의 `base: "./"`가 모든 에셋 경로를 상대 경로로 유지하므로,
   도메인 루트에서 서빙하든 프로젝트 하위 경로에서 서빙하든 빌드가 그대로

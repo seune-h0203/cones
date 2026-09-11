@@ -34,9 +34,9 @@
   );
 
   /* ---- type ---- */
-  --f-display: "Bebas Neue", "Inter", "Noto Sans KR", sans-serif;
-  --f-body: "Inter", "Noto Sans KR", sans-serif;
-  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --f-display: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --f-body: "Segoe UI", "Malgun Gothic", sans-serif;
+  --f-mono: Consolas, "Courier New", monospace;
 
   --t-hero: clamp(3.2rem, 9vw, 9rem);
   --t-display: clamp(2.6rem, 6.5vw, 6rem);

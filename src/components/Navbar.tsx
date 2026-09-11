@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
 import { DEBUT_LABEL, NAV, SITE } from "../data/site";
 import { useScrollLock } from "../hooks/useFocusTrap";
 import { asset } from "../utils/asset";
@@ -9,8 +8,6 @@ import styles from "./Navbar.module.css";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const location = useLocation();
-
   useScrollLock(open);
 
   useEffect(() => {
@@ -19,8 +16,6 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => setOpen(false), [location.pathname]);
 
   useEffect(() => {
     if (!open) return;
@@ -34,20 +29,20 @@ export function Navbar() {
   return (
     <header className={styles.root} data-scrolled={scrolled} data-open={open}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.brand} aria-label={`${SITE.name} 홈`}>
+        <a href="#hero-title" className={styles.brand} aria-label={`${SITE.name} 홈`}>
           <img src={asset("images/cones-logo.png")} alt={SITE.name} width={158} height={28} />
-        </Link>
+        </a>
 
         <nav className={styles.links} aria-label="주요 메뉴">
           {NAV.map((item) => (
-            <NavLink
+            <a
               key={item.path}
-              to={item.path}
-              end={item.path === "/"}
-              className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ""}`}
+              href={item.path}
+              className={styles.link}
+              onClick={() => setOpen(false)}
             >
               {item.label}
-            </NavLink>
+            </a>
           ))}
         </nav>
 
@@ -70,18 +65,16 @@ export function Navbar() {
         <div className={styles.overlay} id="cones-menu">
           <nav className={styles.overlayNav} aria-label="전체 메뉴">
             {NAV.map((item, i) => (
-              <NavLink
+              <a
                 key={item.path}
-                to={item.path}
-                end={item.path === "/"}
-                className={({ isActive }) =>
-                  `${styles.overlayLink} ${isActive ? styles.overlayActive : ""}`
-                }
+                href={item.path}
+                className={styles.overlayLink}
+                onClick={() => setOpen(false)}
                 style={{ animationDelay: `${80 + i * 60}ms` }}
               >
                 <span className={`u-mono ${styles.overlayIndex}`}>0{i + 1}</span>
                 <span className="u-display">{item.label}</span>
-              </NavLink>
+              </a>
             ))}
           </nav>
           <div className={styles.overlayFoot}>

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { ARTISTS } from "../data/artists";
 import { CYCLE } from "../data/site";
 import { useInView } from "../hooks/useInView";
@@ -21,13 +20,7 @@ export function SystemCycle() {
             >
               <span className={`u-mono ${styles.nodeIndex}`}>0{i + 1}</span>
               <span className={`u-display ${styles.nodeAbility}`}>{step.ability}</span>
-              {artist ? (
-                <Link to={`/artists/${artist.id}`} className={`u-mono ${styles.nodeArtist}`}>
-                  {step.artist}
-                </Link>
-              ) : (
-                <span className={`u-mono ${styles.nodeArtist}`}>{step.artist}</span>
-              )}
+              <span className={`u-mono ${styles.nodeArtist}`}>{artist?.stageName ?? step.artist}</span>
               <span className={`u-mono ${styles.nodeUnit}`}>{step.unit}</span>
             </li>
           );
