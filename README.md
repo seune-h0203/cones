@@ -66,6 +66,15 @@ CONES는 AI UNIT과 COMPUTER UNIT이라는 두 개의 독립된 유닛이 하나
 
 ## 2. 멤버
 
+<table>
+<tr>
+<td align="center" width="25%"><img src="public/images/rina-portrait-sm.jpg" width="160" alt="SERINA"><br><b>SERINA</b><br><sub>AI UNIT · LEARN</sub></td>
+<td align="center" width="25%"><img src="public/images/baesan-portrait-sm.jpg" width="160" alt="BAESAN"><br><b>BAESAN</b><br><sub>AI UNIT · PREDICT</sub></td>
+<td align="center" width="25%"><img src="public/images/hyun-jizel-portrait-sm.jpg" width="160" alt="HYUN JIZEL"><br><b>HYUN JIZEL</b><br><sub>COMPUTER UNIT · DESIGN</sub></td>
+<td align="center" width="25%"><img src="public/images/ham-bom-portrait-sm.jpg" width="160" alt="HAM BOM"><br><b>HAM BOM</b><br><sub>COMPUTER UNIT · EXECUTE</sub></td>
+</tr>
+</table>
+
 | # | 이름 | 본명 | UNIT | ABILITY | 포지션 |
 | --- | --- | --- | --- | --- | --- |
 | 01 | **SERINA** (세리나) | 박세린 | AI UNIT | `LEARN` | MAIN DESIGNER |
