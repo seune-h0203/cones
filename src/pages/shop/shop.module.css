@@ -40,7 +40,11 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* Source MD posters only yield ~250-290px-wide product crops — sizing
+     columns to that native width (instead of a fixed 4-up split of the
+     full container) keeps cards near 1:1 scale instead of upscaling and
+     blurring them. */
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1px;
   background: var(--c-line-soft);
   border: 1px solid var(--c-line-soft);
@@ -115,7 +119,9 @@
 
 .detailLayout {
   display: grid;
-  grid-template-columns: minmax(260px, 480px) 1fr;
+  /* Capped near the source crops' native width (~250-290px) so the browser
+     isn't stretching a small product photo ~2x and blurring it. */
+  grid-template-columns: minmax(200px, 320px) 1fr;
   gap: clamp(24px, 5vw, 64px);
   padding-block: var(--s-xl);
 }
