@@ -275,7 +275,7 @@ supabase/
 
 ### 6.1. 협업 방식
 
-- **GitHub Issues** — `[PLAN]` `[FE]` `[DESIGN]` `[QA]` `[CONTENT]` `[DEPLOY]` `[PRESENTATION]` 카테고리 라벨과 `STATUS: BACKLOG / READY / IN PROGRESS / DONE` 상태 라벨로 작업을 관리한다.
+- **GitHub Issues** — `[PLAN]` `[FE]` `[BE]` `[DB]` `[DESIGN]` `[QA]` `[CONTENT]` `[DOCS]` `[FIX]` `[DEPLOY]` `[DEVOPS]` `[PRESENTATION]` 카테고리 라벨과 `STATUS: BACKLOG / READY / IN PROGRESS / DONE` 상태 라벨로 작업을 관리한다.
 - **GitHub Projects / Milestone** — "CONES — FINAL SUBMISSION" 마일스톤으로 전체 작업을 하나의 마감일(2026.09.15)에 맞춰 추적한다. 별도의 Projects 보드 구성은 추후 업데이트 예정.
 - **팀원별 역할** — 이슈마다 표 형식으로 담당(SERINA / BAESAN / HYUN JIZEL / HAM BOM), Kanban 상태, Story Point를 기록한다.
 - **Branch / PR** — 현재는 `main` 단일 브랜치로 운영 중이며, 별도 브랜치 전략과 PR 리뷰 프로세스는 추후 업데이트 예정.
@@ -288,7 +288,7 @@ supabase/
 | 2026.09.10 | RINA → SERINA 표기 정리, About 페이지에 디렉터 프로필 추가, README 한글화 |
 | 2026.09.12 | 여러 페이지로 나뉘어 있던 구조를 One Page Landing Page로 통합, 아티스트 프로필 모달 도입, 홈 화면에 디렉터 섹션 분리 추가 |
 | 2026.09.12 | [4.4. OFFICIAL MD](#44-official-md) 커머스 MVP 추가 — 32개 실제 상품, Supabase DB/Auth, Shop → Cart → Checkout → Order → My Orders 전체 흐름, GitHub Pages SPA 서브패스 라우팅 대응 |
-| 2026.09.13 | 주문 내역(My Orders, 주문 상세)에 실제 상품 이미지 표시 추가, 문서 구조 개편 |
+| 2026.09.13 | 주문 내역(My Orders, 주문 상세)에 실제 상품 이미지 표시 추가, 문서 구조 개편, 멤버 데이터(팬덤·생일) 정합성 수정, GitHub Issues/Kanban 전체 정리(신규 이슈 등록 및 완료 처리) |
 
 CONES는 아직 데뷔 전(pre-debut) 단계다. 별도의 인기 지표, 수상 및 성과 기록은 없으며, 데뷔 쇼케이스(2026.09.15) 이후 업데이트 예정.
 
