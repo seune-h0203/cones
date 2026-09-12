@@ -2,16 +2,21 @@ import { useCallback, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { supabase } from "../../lib/supabase";
-import type { OrderRow } from "../../lib/database.types";
+import type { OrderItemRow, OrderRow } from "../../lib/database.types";
+import { asset } from "../../utils/asset";
 import { formatKrw } from "../../utils/currency";
 import { useSeo } from "../../hooks/useSeo";
 import pageStyles from "../pages.module.css";
 import styles from "./shop.module.css";
 
+type OrderWithItems = OrderRow & {
+  order_items: Pick<OrderItemRow, "id" | "product_name" | "image">[];
+};
+
 export default function MyOrders() {
   useSeo({ title: "CONES — MY ORDERS", description: "내 CONES 공식 MD 주문 내역." });
   const { user, loading: authLoading } = useAuth();
-  const [orders, setOrders] = useState<OrderRow[]>([]);
+  const [orders, setOrders] = useState<OrderWithItems[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
@@ -19,10 +24,10 @@ export default function MyOrders() {
     setLoading(true);
     const { data } = await supabase
       .from("orders")
-      .select("*")
+      .select("*, order_items(id, product_name, image)")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false });
-    setOrders(data ?? []);
+    setOrders((data as OrderWithItems[] | null) ?? []);
     setLoading(false);
   }, [user]);
 
@@ -58,6 +63,21 @@ export default function MyOrders() {
           <ul className={styles.orderList}>
             {orders.map((order) => (
               <li key={order.id} className={styles.orderRow}>
+                <div className={styles.orderThumbs}>
+                  {order.order_items.slice(0, 3).map((item) =>
+                    item.image ? (
+                      <img
+                        key={item.id}
+                        className={styles.orderThumb}
+                        src={asset(item.image)}
+                        alt={item.product_name}
+                        decoding="async"
+                      />
+                    ) : (
+                      <div key={item.id} className={styles.orderThumb} aria-hidden="true" />
+                    ),
+                  )}
+                </div>
                 <div>
                   <p className="u-mono">{order.order_number}</p>
                   <p className={`u-mono ${styles.orderDate}`}>{new Date(order.created_at).toLocaleDateString("ko-KR")}</p>

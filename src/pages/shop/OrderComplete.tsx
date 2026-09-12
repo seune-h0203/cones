@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import type { OrderItemRow, OrderRow } from "../../lib/database.types";
+import { asset } from "../../utils/asset";
 import { formatKrw } from "../../utils/currency";
 import { useSeo } from "../../hooks/useSeo";
 import pageStyles from "../pages.module.css";
@@ -54,6 +55,16 @@ export default function OrderComplete() {
           <ul className={styles.cartList}>
             {items.map((item) => (
               <li key={item.id} className={styles.cartLine}>
+                {item.image ? (
+                  <img
+                    className={styles.cartLineImage}
+                    src={asset(item.image)}
+                    alt={item.product_name}
+                    decoding="async"
+                  />
+                ) : (
+                  <div className={styles.cartLineImage} aria-hidden="true" />
+                )}
                 <div className={styles.cartLineBody}>
                   <p className="u-mono">{item.product_name}</p>
                   <p className={`u-mono ${styles.cartLinePrice}`}>수량 {item.quantity}개</p>

@@ -260,12 +260,24 @@
 
 .orderRow {
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   align-items: center;
   gap: var(--s-md);
   padding: var(--s-md) 0;
   border-bottom: 1px solid var(--c-line-soft);
 }
+
+.orderThumbs { display: flex; }
+
+.orderThumb {
+  width: 44px;
+  aspect-ratio: 245 / 187;
+  object-fit: cover;
+  background: var(--c-surface);
+  border: 1px solid var(--c-black);
+}
+
+.orderThumb + .orderThumb { margin-left: -16px; }
 
 .orderDate { color: var(--c-faint); font-size: var(--t-micro); }
 

@@ -64,6 +64,7 @@ export interface OrderItemRow {
   quantity: number;
   unit_price: number;
   option: string | null;
+  image: string | null;
 }
 
 export interface CreateOrderResult {

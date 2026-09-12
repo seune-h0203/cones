@@ -61,8 +61,16 @@ create table if not exists public.order_items (
   product_name text not null,
   quantity integer not null,
   unit_price integer not null,
-  option text
+  option text,
+  -- Denormalized like product_name: the order should still show its product
+  -- photo even if the product is later deleted or its image path changes.
+  image text
 );
+
+-- Re-running this file against an already-deployed project (created before
+-- this column existed) needs an explicit ALTER — CREATE TABLE IF NOT EXISTS
+-- above is a no-op once the table already exists.
+alter table public.order_items add column if not exists image text;
 
 create index if not exists idx_products_artist on public.products (artist_id);
 create index if not exists idx_cart_items_cart on public.cart_items (cart_id);
@@ -175,8 +183,8 @@ begin
   values (v_user_id, v_order_number, v_subtotal, v_shipping, v_total, 'PENDING')
   returning id into v_order_id;
 
-  insert into public.order_items (order_id, product_id, product_name, quantity, unit_price, option)
-  select v_order_id, p.id, p.name, ci.quantity, p.price, ci.option
+  insert into public.order_items (order_id, product_id, product_name, quantity, unit_price, option, image)
+  select v_order_id, p.id, p.name, ci.quantity, p.price, ci.option, p.image
   from public.cart_items ci
   join public.products p on p.id = ci.product_id
   where ci.cart_id = v_cart_id;
