@@ -25,6 +25,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Supabase's publishable/anon key is designed to be public — it ships
+          # inside the client bundle regardless, and RLS policies (not key
+          # secrecy) are what protect the data. Safe to check in.
+          VITE_SUPABASE_URL: https://ljkfoiiefhszjufxjbep.supabase.co
+          VITE_SUPABASE_ANON_KEY: sb_publishable_CikaQT76tt0suBWaoQvxBg_uIjsJTDv
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
