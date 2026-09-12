@@ -52,9 +52,14 @@ export function ArtistProfileModal({ artist, onClose }: { artist: Artist | null;
             <h2 className={`u-display ${styles.name}`}>{artist.stageName}</h2>
             <p className={`u-mono ${styles.ability}`}>{artist.ability} · {artist.position}</p>
             <p className={styles.quote}>{artist.sentence}</p>
-            <button type="button" className="u-btn u-btn--primary" onClick={() => setTeaserOpen(true)}>
-              PLAY TEASER <span className="u-arrow">-&gt;</span>
-            </button>
+            <div className={styles.actions}>
+              <button type="button" className="u-btn u-btn--primary" onClick={() => setTeaserOpen(true)}>
+                PLAY TEASER <span className="u-arrow">-&gt;</span>
+              </button>
+              <a className="u-btn" href={asset(artist.images.md)} target="_blank" rel="noreferrer">
+                OFFICIAL MD <span className="u-arrow">-&gt;</span>
+              </a>
+            </div>
           </div>
         </div>
         <div className={styles.details}>

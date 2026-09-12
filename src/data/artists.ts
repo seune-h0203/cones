@@ -11,6 +11,8 @@ export interface ArtistImages {
   wide: string;
   /** 1200x630 open-graph card */
   og: string;
+  /** official MD collection catalogue poster (3:2) */
+  md: string;
 }
 
 export interface ProfileField {
@@ -45,6 +47,7 @@ const img = (id: string): ArtistImages => ({
   portraitSmall: `images/${id}-portrait-sm.jpg`,
   wide: `images/${id}-wide.jpg`,
   og: `images/og/${id}.jpg`,
+  md: `images/md/${id}-md.jpg`,
 });
 
 export const ARTISTS: Artist[] = [

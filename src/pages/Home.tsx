@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ARTISTS, type Artist } from "../data/artists";
-import { COMPANY, DEBUT_DATE, DEBUT_LABEL, SITE, UNITS } from "../data/site";
+import { COMPANY, DEBUT_DATE, DEBUT_LABEL, GROUP_MD_POSTER, SITE, UNITS } from "../data/site";
 import { useCountdown } from "../hooks/useCountdown";
 import { usePointerFine, useReducedMotion } from "../hooks/useMedia";
 import { useSeo } from "../hooks/useSeo";
@@ -89,6 +89,8 @@ export default function Home() {
       <section className={`u-section ${styles.team}`} id="team"><div className="u-container"><SectionHeader index="06" kicker="TEAM 02" title="FOUR ROLES. ONE SYSTEM." lead="CONES의 팀은 시스템의 순환을 각자의 역할로 구현한다." /><div className={styles.teamGrid}>{ARTISTS.map((artist, i) => <Reveal key={artist.id} delay={i * 90} className={styles.teamCard}><span className="u-mono">0{i + 1} / {artist.ability}</span><strong className="u-display">{artist.stageName}</strong><span className="u-mono">{artist.position}</span><span className={styles.teamUnit}>{UNITS[artist.unit].name}</span></Reveal>)}</div></div></section>
 
       <section className={`u-section ${styles.director}`} id="director"><div className="u-container"><SectionHeader index="07" kicker="LEADERSHIP" title="DIRECTOR" compact /><Reveal className={styles.directorPanel}><div className={styles.directorMedia}><img className={styles.directorImage} src={asset("images/director-portrait.jpg")} srcSet={`${asset("images/director-portrait-sm.jpg")} 480w, ${asset("images/director-portrait.jpg")} 589w`} sizes="(max-width: 900px) 80vw, 38vw" alt={`${COMPANY.name} — ${COMPANY.role}`} loading="lazy" decoding="async" /></div><div className={styles.directorBody}><p className="u-kicker">DIRECTOR</p><p className={`u-display ${styles.directorName}`}>{COMPANY.name}</p><p className={`u-mono ${styles.directorRole}`}>{COMPANY.role} — CONES</p></div></Reveal></div></section>
+
+      <section className={`u-section ${styles.shop}`} id="shop"><div className="u-container"><SectionHeader index="08" kicker="OFFICIAL MD" title="CONES × ALL" lead="네 사람의 순환이 만든 시스템을, 이제 손에 쥘 수 있는 형태로." /><a className={styles.shopBanner} href={asset(GROUP_MD_POSTER)} target="_blank" rel="noreferrer" data-cursor="view"><img src={asset(GROUP_MD_POSTER)} alt="CONES OFFICIAL MD — GROUP CAMPAIGN" loading="lazy" decoding="async" /></a><div className={styles.shopGrid}>{ARTISTS.map((artist) => <a key={artist.id} className={styles.shopCard} href={asset(artist.images.md)} target="_blank" rel="noreferrer" data-cursor="view"><img src={asset(artist.images.md)} alt={`${artist.stageName} OFFICIAL MD`} loading="lazy" decoding="async" /><span className={`u-mono ${styles.shopCardLabel}`}>{artist.stageName} MD <span className="u-arrow">-&gt;</span></span></a>)}</div></div></section>
 
       <section className={styles.final} id="cta"><div className={`u-container ${styles.finalInner}`}><Reveal><LogoMark alt={SITE.name} className={styles.finalLogo} shine loading="lazy" /><p className={`u-display ${styles.finalQuestion}`}>READY TO CONNECT?</p><p className={`u-kicker ${styles.finalTagline}`}>{SITE.tagline}</p><a href="#hero-title" className="u-btn u-btn--primary">ENTER CONES <span className="u-arrow">↑</span></a></Reveal></div></section>
 

@@ -48,6 +48,7 @@
   filter: contrast(1.06) saturate(1.08);
 }
 
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .heading { padding-bottom: 8px; }
 .name { margin-top: 14px; font-size: clamp(3.2rem, 9vw, 7.5rem); }
 .ability { margin-top: 18px; color: var(--c-silver); font-size: var(--t-label); }

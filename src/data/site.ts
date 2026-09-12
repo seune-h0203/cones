@@ -18,12 +18,16 @@ export const DEBUT_DATE = new Date(2026, 8, 15, 0, 0, 0);
 
 export const DEBUT_LABEL = "09.15.2026";
 
+/** CONES × ALL — official MD campaign group poster (3:2). */
+export const GROUP_MD_POSTER = "images/md/cones-group-md.jpg";
+
 export const NAV = [
   { label: "ORIGINS", path: "#origins" },
   { label: "SYSTEM", path: "#system" },
   { label: "ARTISTS", path: "#artists" },
   { label: "PROJECT", path: "#project" },
   { label: "TEAM", path: "#team" },
+  { label: "MD", path: "#shop" },
 ] as const;
 
 export interface UnitInfo {
