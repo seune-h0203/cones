@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CONES</title>
+    <script>
+      // GitHub Pages has no server-side rewrite for client-side routes
+      // (e.g. /shop/product/x). This is the standard SPA-on-GitHub-Pages
+      // redirect: https://github.com/rafgraph/spa-github-pages
+      //
+      // pathSegmentsToKeep = 1 because this repo is always served as a
+      // GitHub Pages *project* site (username.github.io/<repo>/) — one
+      // path segment is the project root, kept as-is; it does not hardcode
+      // the repo name, so a rename still works. It intentionally doesn't
+      // touch the Vite `base: "./"` / asset() convention used everywhere
+      // else in this app, which stays relative and subpath-agnostic for
+      // local/offline serving (see README — 네트워크 비의존 배포).
+      var pathSegmentsToKeep = 1;
+      var l = window.location;
+      var segments = l.pathname.split("/").slice(1);
+      var base = "/" + segments.slice(0, pathSegmentsToKeep).join("/") + "/";
+      var rest = "/" + segments.slice(pathSegmentsToKeep).join("/");
+      l.replace(
+        base +
+          "?redirect=" +
+          encodeURIComponent(rest + l.search.replace(/^\?/, "~and~") + l.hash),
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

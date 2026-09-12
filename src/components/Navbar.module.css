@@ -81,6 +81,34 @@
 .meta {
   display: flex;
   align-items: center;
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.cartLink {
+  position: relative;
+  font-family: var(--f-mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.26em;
+  color: var(--c-dim);
+  transition: color var(--m-fast) var(--ease);
+}
+
+.cartLink:hover { color: var(--c-white); }
+
+.cartCount {
+  position: absolute;
+  top: -8px;
+  right: -14px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  display: grid;
+  place-items: center;
+  font-size: 0.6rem;
+  font-family: var(--f-mono);
+  color: var(--c-black);
+  background: var(--c-white);
+  border-radius: 999px;
 }
 
 .toggle {
@@ -163,6 +191,12 @@
   font-size: 1.1rem;
   color: var(--c-white);
   letter-spacing: 0.16em;
+}
+
+.overlayAccount {
+  display: flex;
+  gap: var(--s-lg);
+  margin-top: var(--s-sm);
 }
 
 @media (max-width: 900px) {

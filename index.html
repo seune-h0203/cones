@@ -25,6 +25,54 @@
 
   </head>
   <body>
+    <script>
+      // Restores the original deep-link path saved by public/404.html
+      // (GitHub Pages has no server-side rewrite for client routes like
+      // /shop/product/x) before React Router mounts. Counterpart of the
+      // rafgraph/spa-github-pages redirect in public/404.html.
+      //
+      // window.__CONES_BASE__ becomes <BrowserRouter basename>, detected
+      // at runtime instead of hardcoded so the same build works from a
+      // GitHub Pages project subpath, a custom domain root, or a local
+      // static server (see vite.config.ts base: "./" / utils/asset.ts).
+      (function () {
+        var redirect = location.search
+          .slice(1)
+          .split("&")
+          .find(function (part) {
+            return part.indexOf("redirect=") === 0;
+          });
+
+        if (redirect) {
+          // Came through public/404.html — at this exact point (before
+          // replaceState) location.pathname IS the deployment root by
+          // construction of that redirect, whatever its subpath depth.
+          window.__CONES_BASE__ = location.pathname.replace(/\/?$/, "/");
+          var decoded = decodeURIComponent(redirect.slice("redirect=".length));
+          var parts = decoded.split("~and~");
+          var path = parts[0];
+          var query = parts[1] ? "?" + parts[1] : "";
+          history.replaceState(null, "", window.__CONES_BASE__.slice(0, -1) + path + query);
+          return;
+        }
+
+        // No redirect param: either a plain visit to the site root, or a
+        // deep link served directly by a host with its own SPA fallback
+        // (vite dev/preview, Netlify, Vercel, …) — those always root the
+        // app at "/". Tell the two apart by checking whether a known
+        // in-app route segment shows up in the path; if so, everything
+        // before it is the base.
+        var knownRoutes = ["shop", "cart", "checkout", "order", "mypage", "login", "signup"];
+        var segments = location.pathname.split("/").filter(Boolean);
+        var routeIndex = segments.findIndex(function (segment) {
+          return knownRoutes.indexOf(segment) !== -1;
+        });
+        window.__CONES_BASE__ =
+          routeIndex === -1
+            ? location.pathname.replace(/\/?$/, "/")
+            : "/" + segments.slice(0, routeIndex).join("/") + "/";
+      })();
+    </script>
     <div id="root"></div>
     <noscript>
       <div style="padding: 40px; color: #f4f4f2; background: #050506; font-family: sans-serif">

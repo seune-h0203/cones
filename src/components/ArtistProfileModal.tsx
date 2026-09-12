@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ABILITY_COPY, profileFields, type Artist } from "../data/artists";
 import { UNITS } from "../data/site";
 import { useFocusTrap, useScrollLock } from "../hooks/useFocusTrap";
@@ -56,9 +57,9 @@ export function ArtistProfileModal({ artist, onClose }: { artist: Artist | null;
               <button type="button" className="u-btn u-btn--primary" onClick={() => setTeaserOpen(true)}>
                 PLAY TEASER <span className="u-arrow">-&gt;</span>
               </button>
-              <a className="u-btn" href={asset(artist.images.md)} target="_blank" rel="noreferrer">
+              <Link className="u-btn" to={`/shop?artist=${artist.id}`} onClick={onClose}>
                 OFFICIAL MD <span className="u-arrow">-&gt;</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { DEBUT_LABEL, NAV, SITE } from "../data/site";
+import { useAuth } from "../contexts/AuthContext";
+import { useCart } from "../contexts/CartContext";
 import { useScrollLock } from "../hooks/useFocusTrap";
 import { asset } from "../utils/asset";
 import { Countdown } from "./Countdown";
@@ -8,6 +11,8 @@ import styles from "./Navbar.module.css";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
+  const { totalCount } = useCart();
   useScrollLock(open);
 
   useEffect(() => {
@@ -29,25 +34,41 @@ export function Navbar() {
   return (
     <header className={styles.root} data-scrolled={scrolled} data-open={open}>
       <div className={styles.inner}>
-        <a href="#hero-title" className={styles.brand} aria-label={`${SITE.name} 홈`}>
+        <Link to="/" className={styles.brand} aria-label={`${SITE.name} 홈`}>
           <img src={asset("images/cones-logo.png")} alt={SITE.name} width={158} height={28} />
-        </a>
+        </Link>
 
         <nav className={styles.links} aria-label="주요 메뉴">
           {NAV.map((item) => (
             <a
               key={item.path}
-              href={item.path}
+              href={`/${item.path}`}
               className={styles.link}
               onClick={() => setOpen(false)}
             >
               {item.label}
             </a>
           ))}
+          <Link to="/shop" className={styles.link} onClick={() => setOpen(false)}>
+            SHOP
+          </Link>
         </nav>
 
         <div className={styles.meta}>
           <Countdown variant="chip" />
+          <Link to="/cart" className={styles.cartLink} aria-label="장바구니">
+            <span className="u-mono">CART</span>
+            {totalCount > 0 && <span className={styles.cartCount}>{totalCount}</span>}
+          </Link>
+          {user ? (
+            <Link to="/mypage/orders" className={styles.link}>
+              MY ORDERS
+            </Link>
+          ) : (
+            <Link to="/login" className={styles.link}>
+              LOGIN
+            </Link>
+          )}
         </div>
 
         <button
@@ -67,7 +88,7 @@ export function Navbar() {
             {NAV.map((item, i) => (
               <a
                 key={item.path}
-                href={item.path}
+                href={`/${item.path}`}
                 className={styles.overlayLink}
                 onClick={() => setOpen(false)}
                 style={{ animationDelay: `${80 + i * 60}ms` }}
@@ -76,11 +97,35 @@ export function Navbar() {
                 <span className="u-display">{item.label}</span>
               </a>
             ))}
+            <Link
+              to="/shop"
+              className={styles.overlayLink}
+              onClick={() => setOpen(false)}
+              style={{ animationDelay: `${80 + NAV.length * 60}ms` }}
+            >
+              <span className={`u-mono ${styles.overlayIndex}`}>0{NAV.length + 1}</span>
+              <span className="u-display">SHOP</span>
+            </Link>
           </nav>
           <div className={styles.overlayFoot}>
             <p className="u-kicker">DEBUT SHOWCASE</p>
             <p className={`u-mono ${styles.overlayDate}`}>{DEBUT_LABEL}</p>
             <Countdown variant="inline" />
+            <div className={styles.overlayAccount}>
+              <Link to="/cart" className={styles.cartLink} onClick={() => setOpen(false)}>
+                <span className="u-mono">CART</span>
+                {totalCount > 0 && <span className={styles.cartCount}>{totalCount}</span>}
+              </Link>
+              {user ? (
+                <Link to="/mypage/orders" className={styles.link} onClick={() => setOpen(false)}>
+                  MY ORDERS
+                </Link>
+              ) : (
+                <Link to="/login" className={styles.link} onClick={() => setOpen(false)}>
+                  LOGIN
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       )}
