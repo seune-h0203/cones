@@ -42,7 +42,7 @@ export function Navbar() {
           {NAV.map((item) => (
             <a
               key={item.path}
-              href={`/${item.path}`}
+              href={`${window.__CONES_BASE__ ?? "/"}${item.path}`}
               className={styles.link}
               onClick={() => setOpen(false)}
             >
@@ -88,7 +88,7 @@ export function Navbar() {
             {NAV.map((item, i) => (
               <a
                 key={item.path}
-                href={`/${item.path}`}
+                href={`${window.__CONES_BASE__ ?? "/"}${item.path}`}
                 className={styles.overlayLink}
                 onClick={() => setOpen(false)}
                 style={{ animationDelay: `${80 + i * 60}ms` }}
