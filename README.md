@@ -1,7 +1,5 @@
 # CONES
 
-*(대표 이미지 / One Page Landing Page 프리뷰 삽입 위치 — 준비되는 대로 추가 예정)*
-
 > DIFFERENT ONES, CONNECTED AS ONE.
 
 첫 번째 프로젝트는 `PROJECT : CONNECTION : 00`이며, 데뷔 쇼케이스는 **2026.09.15**로 예정되어 있다. 공식 사이트는 [seune-h0203.github.io/cones](https://seune-h0203.github.io/cones/), 코드 저장소는 [github.com/seune-h0203/cones](https://github.com/seune-h0203/cones)다.
