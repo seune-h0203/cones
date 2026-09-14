@@ -11,6 +11,10 @@
   font-size: var(--t-micro);
 }
 
+.heroActions {
+  margin-top: var(--s-md);
+}
+
 /* ---------- artist filter tabs ---------- */
 
 .artistTabs {
