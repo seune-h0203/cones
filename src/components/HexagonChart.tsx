@@ -5,12 +5,19 @@ import styles from "./HexagonChart.module.css";
 const AXES = 6;
 const SIZE = 760;
 const CENTER = SIZE / 2;
-const RADIUS = 210;
-// Generous gap between the outer ring and the label anchor point: labels are
-// Korean text ("맥시멀리스트력") that can run ~100+ user units wide, and
-// `overflow: visible` means nothing clips it — the margin has to actually
-// contain it instead, on every viewport the SVG gets scaled down to.
-const LABEL_RADIUS = RADIUS + 55;
+// The plot itself is kept smaller than the viewBox would allow so the label
+// text (see LABEL_FONT_SIZE below) can be large enough to actually read —
+// the ring was previously bigger but that only left room for ~15 unit-tall
+// text, which renders under 10px once the SVG is scaled down to its ~400px
+// on-screen width. Legible labels win over a maximal hexagon.
+const RADIUS = 130;
+// Gap between the outer ring and the label anchor point: labels are Korean
+// text ("맥시멀리스트력") that can run wide, and `overflow: visible` means
+// nothing clips it — the margin has to actually contain it instead, on
+// every viewport the SVG gets scaled down to.
+const LABEL_RADIUS = RADIUS + 45;
+const LABEL_FONT_SIZE = 24;
+const VALUE_FONT_SIZE = 19;
 const GUIDE_LEVELS = [0.2, 0.4, 0.6, 0.8, 1];
 
 /** Angle for axis `i` of `count`, starting at the top and running clockwise. */
@@ -94,8 +101,8 @@ export function HexagonChart({ stats }: { stats: HexagonStat[] }) {
           const { anchor, dy } = labelAnchor(i, stats.length);
           return (
             <text key={stat.label} x={p.x} y={p.y} dy={dy} textAnchor={anchor} className={styles.label}>
-              <tspan fontSize={15}>{stat.label}</tspan>
-              <tspan x={p.x} dy="1.25em" fontSize={13} className={styles.labelValue}>
+              <tspan fontSize={LABEL_FONT_SIZE}>{stat.label}</tspan>
+              <tspan x={p.x} dy="1.3em" fontSize={VALUE_FONT_SIZE} className={styles.labelValue}>
                 {stat.value}
               </tspan>
             </text>
