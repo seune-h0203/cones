@@ -96,14 +96,34 @@
         if (!window.__CONES_IS_LANDING__) return;
         var audio = document.getElementById("cones-theme");
         var events = ["pointerdown", "keydown", "touchstart", "wheel"];
-        // Start the track 4s in, timed to land with the intro's opening
-        // beat instead of its own (silent) lead-in. A seek before playback
-        // ever begins sticks regardless of whether this first play()
-        // attempt itself is autoplay-blocked, so this only needs setting
-        // once, here — not again in unlock() below.
+        var STORAGE_KEY = "cones-theme-time";
+
+        // A real page refresh always tears down and recreates the <audio>
+        // element (there's no browser API that survives a document
+        // reload), so "keeps playing across refresh" has to mean "resumes
+        // from the same position" rather than literally uninterrupted
+        // audio. sessionStorage keeps that position for this tab only — a
+        // genuinely new tab/session has nothing saved and starts 4s in,
+        // same as the very first visit.
+        var saved = Number(sessionStorage.getItem(STORAGE_KEY));
         try {
-          audio.currentTime = 4;
+          audio.currentTime = saved > 0 ? saved : 4;
         } catch (e) {}
+
+        var lastSaved = 0;
+        function persistPosition() {
+          try {
+            sessionStorage.setItem(STORAGE_KEY, String(audio.currentTime));
+          } catch (e) {}
+        }
+        audio.addEventListener("timeupdate", function () {
+          var now = Date.now();
+          if (now - lastSaved < 1000) return;
+          lastSaved = now;
+          persistPosition();
+        });
+        window.addEventListener("pagehide", persistPosition);
+
         function unlock() {
           audio.play().catch(function () {});
         }
