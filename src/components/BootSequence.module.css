@@ -11,7 +11,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: clamp(280px, 60vw, 560px);
+  width: clamp(320px, 78vw, 720px);
   aspect-ratio: 2 / 1;
 }
 
@@ -24,7 +24,7 @@
 
 .logo {
   grid-area: 1 / 1;
-  width: clamp(220px, 42vw, 440px);
+  width: clamp(280px, 56vw, 560px);
 }
 
 /* ---------- 0.0-1.0s : two circles resolve out of black ---------- */

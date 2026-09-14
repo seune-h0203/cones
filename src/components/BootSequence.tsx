@@ -53,8 +53,8 @@ export function BootSequence() {
         <LogoMark
           alt={SITE.name}
           className={styles.logo}
-          width={520}
-          height={92}
+          width={660}
+          height={117}
           reveal
           revealDelay={reduced ? 0 : 3000}
           shine
