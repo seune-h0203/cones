@@ -9,7 +9,7 @@ export const HEXAGON_STATS: Record<string, HexagonStat[]> = {
     { label: "겉바속촉", value: 80 },
     { label: "주량", value: 80 },
     { label: "귀차니즘", value: 80 },
-    { label: "테토력", value: 100 },
+    { label: "에겐력", value: 100 },
     { label: "끼", value: 55 },
     { label: "비주얼", value: 100 },
   ],

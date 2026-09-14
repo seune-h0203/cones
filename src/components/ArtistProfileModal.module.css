@@ -12,10 +12,10 @@
 
 .panel {
   position: relative;
-  width: min(100%, 1100px);
-  max-height: min(88svh, 820px);
+  width: min(100%, 1360px);
+  max-height: min(92svh, 940px);
   overflow: auto;
-  padding: clamp(24px, 4vw, 56px);
+  padding: clamp(28px, 4.5vw, 64px);
   background: var(--c-ink);
   border: 1px solid var(--c-line-strong);
   box-shadow: 0 24px 100px rgba(0, 0, 0, 0.55);
