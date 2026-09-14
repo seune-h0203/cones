@@ -636,7 +636,7 @@
 }
 
 .finaleLogo {
-  width: clamp(220px, 46vw, 620px);
+  width: clamp(280px, 60vw, 860px);
 }
 
 .finaleTagline {
