@@ -52,7 +52,7 @@ export default function Home() {
         <div className={styles.heroBg} aria-hidden="true" />
         <div className={styles.heroInner}>
           <p className={`u-kicker ${styles.heroKicker}`}>{SITE.projectLabel}</p>
-          <h1 className={styles.heroTitle} id="hero-title"><LogoMark alt={SITE.name} className={styles.heroLogo} shine glow reveal revealDelay={280} /></h1>
+          <h1 className={styles.heroTitle} id="hero-title"><span className={styles.heroLogoStage}><LogoMark alt={SITE.name} className={styles.heroLogo} shine glow reveal revealDelay={280} /></span></h1>
           <p className={`u-display ${styles.heroTagline}`}>TWO ORIGINS. <span className="u-chrome">ONE SYSTEM.</span></p>
           <p className={`u-mono ${styles.heroSubline}`}>FOUR MINDS. TWO ORIGINS. ONE SYSTEM.</p>
           <div className={styles.heroDebut}><p className="u-kicker">DEBUT SHOWCASE — {DEBUT_LABEL}</p><Countdown variant="hero" /></div>
