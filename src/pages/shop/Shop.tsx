@@ -1,17 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ARTISTS, getArtist } from "../../data/artists";
-import { UNITS } from "../../data/site";
+import { ARTISTS } from "../../data/artists";
 import { isCommerceConfigured, supabase } from "../../lib/supabase";
 import type { ProductRow } from "../../lib/database.types";
 import { asset } from "../../utils/asset";
 import { formatKrw } from "../../utils/currency";
 import { useSeo } from "../../hooks/useSeo";
-import { VideoModal } from "../../components/VideoModal";
 import pageStyles from "../pages.module.css";
 import styles from "./shop.module.css";
-
-const BAESAN = getArtist("baesan");
 
 export default function Shop() {
   useSeo({ title: "CONES — OFFICIAL MD", description: "CONES 공식 MD 스토어." });
@@ -21,7 +17,6 @@ export default function Shop() {
   const [products, setProducts] = useState<ProductRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const [teaserOpen, setTeaserOpen] = useState(false);
 
   useEffect(() => {
     if (!isCommerceConfigured) {
@@ -60,18 +55,6 @@ export default function Shop() {
           <p className={`u-lead ${pageStyles.heroLead}`}>
             네 사람의 순환이 만든 시스템을, 이제 손에 쥘 수 있는 형태로.
           </p>
-          {BAESAN && (
-            <div className={styles.heroActions}>
-              <button
-                type="button"
-                className="u-btn u-btn--primary"
-                onClick={() => setTeaserOpen(true)}
-                data-cursor="play"
-              >
-                BAESAN TEASER <span className="u-arrow">-&gt;</span>
-              </button>
-            </div>
-          )}
         </div>
       </header>
 
@@ -116,19 +99,6 @@ export default function Shop() {
           </div>
         </div>
       </section>
-
-      {BAESAN && (
-        <VideoModal
-          open={teaserOpen}
-          onClose={() => setTeaserOpen(false)}
-          subject={{
-            id: BAESAN.id,
-            title: BAESAN.stageName,
-            meta: `${UNITS[BAESAN.unit].name} · ${BAESAN.ability}`,
-            poster: BAESAN.images.wide,
-          }}
-        />
-      )}
     </div>
   );
 }

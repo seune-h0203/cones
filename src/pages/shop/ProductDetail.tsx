@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { getArtist } from "../../data/artists";
+import { UNITS } from "../../data/site";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
 import { supabase } from "../../lib/supabase";
@@ -7,8 +9,11 @@ import type { ProductRow } from "../../lib/database.types";
 import { asset } from "../../utils/asset";
 import { formatKrw } from "../../utils/currency";
 import { useSeo } from "../../hooks/useSeo";
+import { VideoModal } from "../../components/VideoModal";
 import pageStyles from "../pages.module.css";
 import styles from "./shop.module.css";
+
+const BAESAN = getArtist("baesan");
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -21,6 +26,7 @@ export default function ProductDetail() {
   const [notFound, setNotFound] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [message, setMessage] = useState<string | null>(null);
+  const [teaserOpen, setTeaserOpen] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
@@ -119,12 +125,36 @@ export default function ProductDetail() {
 
             {message && <p className={styles.notice}>{message}</p>}
 
+            {BAESAN && (
+              <button
+                type="button"
+                className={`u-btn ${styles.teaserLink}`}
+                onClick={() => setTeaserOpen(true)}
+                data-cursor="play"
+              >
+                BAESAN TEASER <span className="u-arrow">-&gt;</span>
+              </button>
+            )}
+
             <Link to={`/shop?artist=${product.artist_id}`} className={styles.backLink}>
               ← {product.artist_id.toUpperCase()} MD 더 보기
             </Link>
           </div>
         </div>
       </div>
+
+      {BAESAN && (
+        <VideoModal
+          open={teaserOpen}
+          onClose={() => setTeaserOpen(false)}
+          subject={{
+            id: BAESAN.id,
+            title: BAESAN.stageName,
+            meta: `${UNITS[BAESAN.unit].name} · ${BAESAN.ability}`,
+            poster: BAESAN.images.wide,
+          }}
+        />
+      )}
     </div>
   );
 }

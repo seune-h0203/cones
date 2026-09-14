@@ -11,10 +11,6 @@
   font-size: var(--t-micro);
 }
 
-.heroActions {
-  margin-top: var(--s-md);
-}
-
 /* ---------- artist filter tabs ---------- */
 
 .artistTabs {
@@ -179,6 +175,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: var(--s-md);
+}
+
+.teaserLink {
   margin-top: var(--s-md);
 }
 
