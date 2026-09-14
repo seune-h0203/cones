@@ -1,7 +1,8 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
+import { BackgroundMusic } from "./components/BackgroundMusic";
 import { CustomCursor } from "./components/CustomCursor";
 import { EasterEgg } from "./components/EasterEgg";
 import { Footer } from "./components/Footer";
@@ -39,6 +40,18 @@ declare global {
   }
 }
 
+/**
+ * Landing-only, mounted at the router root (not inside the lazy-loaded
+ * Home chunk) so it starts trying to play at the same instant the intro
+ * overlay does, instead of waiting on Home's own code-split bundle.
+ * Unmounts — and so stops — the moment the route isn't "/".
+ */
+function LandingMusic() {
+  const location = useLocation();
+  if (location.pathname !== "/") return null;
+  return <BackgroundMusic />;
+}
+
 export default function App() {
   return (
     <AuthProvider>
@@ -50,6 +63,7 @@ export default function App() {
 
           <div className="u-grain" aria-hidden="true" />
           <LoadingScreen />
+          <LandingMusic />
           <CustomCursor />
           <EasterEgg />
 

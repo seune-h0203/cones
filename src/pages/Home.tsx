@@ -9,7 +9,6 @@ import { track } from "../utils/analytics";
 import { asset } from "../utils/asset";
 import { ArtistCard } from "../components/ArtistCard";
 import { ArtistProfileModal } from "../components/ArtistProfileModal";
-import { BackgroundMusic } from "../components/BackgroundMusic";
 import { ConnectionSequence } from "../components/ConnectionSequence";
 import { Countdown } from "../components/Countdown";
 import { LogoMark } from "../components/LogoMark";
@@ -98,7 +97,6 @@ export default function Home() {
 
       <ArtistProfileModal artist={selectedArtist} onClose={() => setSelectedArtist(null)} />
       <VideoModal open={teaserOpen} onClose={() => setTeaserOpen(false)} subject={{ id: "project", title: SITE.project, meta: "CONES OFFICIAL", poster: "images/og/default.jpg" }} />
-      <BackgroundMusic />
     </>
   );
 }
