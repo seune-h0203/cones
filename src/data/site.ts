@@ -13,10 +13,10 @@ export const COMPANY = {
   name: "김남주",
 } as const;
 
-/** Debut showcase — 2026.09.15, local time. */
-export const DEBUT_DATE = new Date(2026, 8, 15, 0, 0, 0);
+/** Debut showcase — 2026.09.14, 10:20 AM local time. */
+export const DEBUT_DATE = new Date(2026, 8, 14, 10, 20, 0);
 
-export const DEBUT_LABEL = "09.15.2026";
+export const DEBUT_LABEL = "09.14.2026";
 
 /** CONES × ALL — official MD campaign group poster (3:2). */
 export const GROUP_MD_POSTER = "images/md/cones-group-md.jpg";
