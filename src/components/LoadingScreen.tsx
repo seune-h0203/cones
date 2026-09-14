@@ -6,14 +6,15 @@ import { IntroSequence } from "./IntroSequence";
 import { LogoMark } from "./LogoMark";
 import styles from "./overlays.module.css";
 
-// The intro choreography (see IntroSequence's SCENE_TIMELINE) is scripted to
-// land at 4.7s, so the screen must stay up at least that long — but a
-// stalled load must never trap the visitor past MAX_VISIBLE, and the SKIP
-// button (handleSkip below) can always end it early regardless of either
-// bound. Under prefers-reduced-motion the sequence is skipped entirely, so
-// there's nothing to wait for.
-const MIN_VISIBLE = 4700;
-const MAX_VISIBLE = 6300;
+// The intro choreography (see IntroSequence's SCENE_TIMELINE, plus the
+// boot-mark -> logo reveal timing hardcoded in the "cones" scene's CSS) is
+// scripted to land at ~6.4s, so the screen must stay up at least that long
+// — but a stalled load must never trap the visitor past MAX_VISIBLE, and
+// the SKIP button (handleSkip below) can always end it early regardless of
+// either bound. Under prefers-reduced-motion the sequence is skipped
+// entirely, so there's nothing to wait for.
+const MIN_VISIBLE = 6400;
+const MAX_VISIBLE = 8000;
 const MIN_VISIBLE_REDUCED = 300;
 const MAX_VISIBLE_REDUCED = 1200;
 

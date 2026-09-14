@@ -38,9 +38,9 @@
 
 @keyframes openFlash {
   0% { opacity: 0; }
-  20% { opacity: 0.5; }
+  20% { opacity: 0.32; }
   40% { opacity: 0; }
-  60% { opacity: 0.22; }
+  60% { opacity: 0.14; }
   100% { opacity: 0; }
 }
 
@@ -76,6 +76,20 @@
   z-index: 2;
 }
 
+/* Permanent editorial vignette (darker edges + a bottom gradient for the
+   name/index legibility) — the same graded, dark-first look the rest of
+   the site already uses (see ArtistCard's own bottom gradient). */
+.member::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 34%, rgba(0, 0, 0, 0.74) 100%),
+    radial-gradient(ellipse at 50% 50%, transparent 56%, rgba(0, 0, 0, 0.46) 100%);
+}
+
 .memberImgWrap {
   position: absolute;
   inset: 0;
@@ -94,7 +108,7 @@
 .memberSweep {
   position: absolute;
   inset: -20% -40%;
-  background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%);
+  background: linear-gradient(100deg, transparent 42%, rgba(233, 236, 240, 0.4) 50%, transparent 58%);
   mix-blend-mode: screen;
   opacity: 0;
   transform: translateX(-35%);
@@ -171,7 +185,7 @@
 
 @keyframes sweepAcross {
   0% { opacity: 0; transform: translateX(-35%); }
-  45% { opacity: 0.9; }
+  45% { opacity: 0.5; }
   100% { opacity: 0; transform: translateX(35%); }
 }
 
@@ -215,7 +229,7 @@
 }
 
 @keyframes quickFlash {
-  0% { opacity: 0.9; }
+  0% { opacity: 0.5; }
   100% { opacity: 0; }
 }
 
@@ -246,9 +260,9 @@
 
 @keyframes hjGlitch {
   0% { transform: translate3d(0, 0, 0) scale(1.15); filter: blur(6px) contrast(1) saturate(1) hue-rotate(0deg); }
-  8% { transform: translate3d(-8px, 2px, 0) scale(1.12); filter: contrast(1.4) saturate(1.8) hue-rotate(-10deg); }
-  16% { transform: translate3d(7px, -2px, 0) scale(1.12); filter: contrast(1.4) saturate(1.8) hue-rotate(10deg); }
-  24% { transform: translate3d(-4px, 0, 0) scale(1.08); filter: contrast(1.15) saturate(1.3) hue-rotate(0deg); }
+  8% { transform: translate3d(-6px, 1px, 0) scale(1.12); filter: contrast(1.22) saturate(1.35) hue-rotate(-6deg); }
+  16% { transform: translate3d(5px, -1px, 0) scale(1.12); filter: contrast(1.22) saturate(1.35) hue-rotate(6deg); }
+  24% { transform: translate3d(-3px, 0, 0) scale(1.08); filter: contrast(1.1) saturate(1.15) hue-rotate(0deg); }
   32%, 100% { transform: translate3d(0, 0, 0) scale(1); filter: contrast(1) saturate(1) hue-rotate(0deg); }
 }
 
@@ -358,6 +372,14 @@
   overflow: hidden;
 }
 
+.quadPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.15) 50%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
 .quadPanel img {
   width: 100%;
   height: 100%;
@@ -456,21 +478,161 @@
 }
 
 .stage[data-scene="cones"] .finale {
-  animation: fadeUpIn 500ms var(--ease) both 240ms;
+  animation: fadeUpIn 500ms var(--ease) both;
 }
+
+/* ---- the original boot mark: two circles converge into an orbital
+   infinity, which then resolves into the CONES wordmark. Ported from the
+   BootSequence this intro replaced, timing compressed ~3x to fit inside
+   one scene instead of owning its own 5s screen — the motion language
+   (and the "logo being assembled" moment specifically) is unchanged. ---- */
+
+.bootMark {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.orbit {
+  width: min(60vw, 420px);
+  height: auto;
+  overflow: visible;
+}
+
+.circle {
+  fill: none;
+  stroke: #eef1f3;
+  stroke-width: 2.4;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.45));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stage[data-scene="cones"] .circleLeft {
+  animation:
+    circleScaleIn 170ms var(--ease) both 0ms,
+    convergeLeft 240ms var(--ease-inout) both 300ms,
+    fadeOutShape 90ms linear both 560ms;
+}
+
+.stage[data-scene="cones"] .circleRight {
+  animation:
+    circleScaleIn 170ms var(--ease) both 90ms,
+    convergeRight 240ms var(--ease-inout) both 300ms,
+    fadeOutShape 90ms linear both 560ms;
+}
+
+@keyframes circleScaleIn {
+  from { scale: 0; opacity: 0; }
+  to { scale: 1; opacity: 1; }
+}
+
+@keyframes convergeLeft {
+  from { translate: 0 0; }
+  to { translate: 40px 0; }
+}
+
+@keyframes convergeRight {
+  from { translate: 0 0; }
+  to { translate: -40px 0; }
+}
+
+@keyframes fadeOutShape {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.spark {
+  fill: #f4f4f2;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stage[data-scene="cones"] .spark {
+  animation:
+    sparkIn 100ms var(--ease) both 480ms,
+    fadeOutShape 90ms linear both 560ms;
+}
+
+@keyframes sparkIn {
+  from { scale: 0.4; opacity: 0; }
+  to { scale: 1; opacity: 1; }
+}
+
+.infinity {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.stage[data-scene="cones"] .infinity {
+  animation:
+    infinityIn 120ms var(--ease) both 560ms,
+    infinitySpin 300ms var(--ease-inout) both 600ms,
+    infinityOut 100ms linear both 860ms;
+}
+
+@keyframes infinityIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes infinityOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes infinitySpin {
+  from { rotate: 0deg; }
+  to { rotate: 360deg; }
+}
+
+.infinityTrack {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.26);
+  stroke-width: 1.6;
+}
+
+.infinityLight {
+  fill: none;
+  stroke: #f4f4f2;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 0.22 1;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.85));
+}
+
+.stage[data-scene="cones"] .infinityLight {
+  animation: travelLight 300ms linear 2 560ms;
+}
+
+@keyframes travelLight {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1; }
+}
+
+/* ---- wordmark: resolves right after the infinity clears, restrained
+   metallic glow instead of a brightness blowout for a darker, costlier
+   look. ---- */
 
 .finaleLogoStage {
   display: inline-block;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
 }
 
 .stage[data-scene="cones"] .finaleLogoStage {
-  animation: finaleImpact 620ms var(--ease) both 260ms;
+  animation: finaleLogoReveal 520ms var(--ease) both 1000ms;
 }
 
-@keyframes finaleImpact {
-  0% { transform: scale(0.7); opacity: 0; filter: brightness(2.2); }
-  55% { transform: scale(1.08); opacity: 1; filter: brightness(1.5); }
-  100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+@keyframes finaleLogoReveal {
+  0% { clip-path: inset(0 100% 0 0); opacity: 0; transform: scale(0.97); filter: drop-shadow(0 0 0 rgba(244, 244, 242, 0)); }
+  12% { opacity: 1; }
+  100% { clip-path: inset(0 0% 0 0); opacity: 1; transform: scale(1); filter: drop-shadow(0 0 26px rgba(244, 244, 242, 0.22)); }
 }
 
 .finaleLogo {
@@ -485,7 +647,7 @@
 }
 
 .stage[data-scene="cones"] .finaleTagline {
-  animation: fadeUpIn 420ms var(--ease) both 540ms;
+  animation: fadeUpIn 420ms var(--ease) both 1580ms;
 }
 
 /* The CONES logo scales up slightly the moment LoadingScreen starts

@@ -111,8 +111,32 @@ export function IntroSequence({ onSkip, exiting }: { onSkip: () => void; exiting
       </div>
 
       <div className={styles.finale} aria-hidden="true">
+        <div className={styles.bootMark}>
+          <svg className={styles.orbit} viewBox="0 0 400 200" role="presentation" focusable="false">
+            <g className={styles.circles}>
+              <circle className={`${styles.circle} ${styles.circleLeft}`} cx="150" cy="100" r="26" />
+              <circle className={`${styles.circle} ${styles.circleRight}`} cx="250" cy="100" r="26" />
+            </g>
+            <path
+              className={styles.spark}
+              d="M200 82 L206 96 L220 100 L206 104 L200 118 L194 104 L180 100 L194 96 Z"
+            />
+            <g className={styles.infinity}>
+              <path
+                className={styles.infinityTrack}
+                pathLength="1"
+                d="M160,100 C160,70 190,70 200,100 C210,130 240,130 240,100 C240,70 210,70 200,100 C190,130 160,130 160,100 Z"
+              />
+              <path
+                className={styles.infinityLight}
+                pathLength="1"
+                d="M160,100 C160,70 190,70 200,100 C210,130 240,130 240,100 C240,70 210,70 200,100 C190,130 160,130 160,100 Z"
+              />
+            </g>
+          </svg>
+        </div>
         <span className={styles.finaleLogoStage}>
-          <LogoMark alt={SITE.name} className={styles.finaleLogo} shine />
+          <LogoMark alt={SITE.name} className={styles.finaleLogo} shine reveal revealDelay={1040} />
         </span>
         <p className={`u-mono ${styles.finaleTagline}`}>DIFFERENT ONES, CONNECTED AS ONE</p>
       </div>
