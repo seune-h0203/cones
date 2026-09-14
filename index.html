@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#050506" />
     <link rel="icon" type="image/png" href="./images/cones-logo-solid.png" />
+    <!-- Kick the background-music fetch off as early as the browser can,
+         in parallel with the JS bundle, instead of waiting for React to
+         mount/adopt the <audio> below — this document is always the real
+         deployed index.html (unlike a deep client route), so a plain
+         relative path resolves correctly without needing
+         window.__CONES_BASE__. -->
+    <link rel="preload" as="audio" href="./audio/theme.mp3" type="audio/mpeg" />
 
     <title>CONES — TWO ORIGINS, ONE SYSTEM.</title>
     <meta
@@ -53,6 +60,10 @@
           var path = parts[0];
           var query = parts[1] ? "?" + parts[1] : "";
           history.replaceState(null, "", window.__CONES_BASE__.slice(0, -1) + path + query);
+          // The theme song (below) only auto-starts on the landing route —
+          // this is the one place before React mounts where we know the
+          // real in-app path being landed on.
+          window.__CONES_IS_LANDING__ = path === "/" || path === "";
           return;
         }
 
@@ -71,6 +82,28 @@
           routeIndex === -1
             ? location.pathname.replace(/\/?$/, "/")
             : "/" + segments.slice(0, routeIndex).join("/") + "/";
+        window.__CONES_IS_LANDING__ = routeIndex === -1;
+      })();
+    </script>
+    <!-- Lives outside React entirely so playback can be attempted the
+         instant this parses — waiting for the JS bundle to fetch, parse
+         and mount was the real source of the audible startup lag. React
+         (see BackgroundMusic.tsx) only adopts/controls this element by id
+         afterwards; it never creates its own <audio>. -->
+    <audio id="cones-theme" src="./audio/theme.mp3" loop preload="auto"></audio>
+    <script>
+      (function () {
+        if (!window.__CONES_IS_LANDING__) return;
+        var audio = document.getElementById("cones-theme");
+        var events = ["pointerdown", "keydown", "touchstart", "wheel"];
+        function unlock() {
+          audio.play().catch(function () {});
+        }
+        audio.play().catch(function () {
+          events.forEach(function (event) {
+            window.addEventListener(event, unlock, { once: true });
+          });
+        });
       })();
     </script>
     <div id="root"></div>

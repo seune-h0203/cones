@@ -1,68 +1,65 @@
-import { useEffect, useRef, useState } from "react";
-import { asset } from "../utils/asset";
+import { useEffect, useState } from "react";
 import styles from "./BackgroundMusic.module.css";
 
-const UNLOCK_EVENTS = ["pointerdown", "keydown", "touchstart", "wheel"] as const;
+const AUDIO_ID = "cones-theme";
+
+function getThemeAudio(): HTMLAudioElement | null {
+  return document.getElementById(AUDIO_ID) as HTMLAudioElement | null;
+}
 
 /**
- * Landing-page theme music, playing with sound as close to "on load" as
- * browsers allow. Autoplay with audio is blocked without a user gesture in
- * most browsers, so this tries unmuted playback immediately and, if that's
- * rejected, arms a one-time listener on the very first interaction anywhere
- * on the page (click, key, scroll, touch) to start it — the visitor never
- * has to find or press the music button themselves. The button is a manual
- * stop/resume toggle for whoever wants to turn it off.
+ * Controls for the landing-page theme song — but doesn't own the <audio>
+ * element itself. That lives as a static tag in index.html and starts
+ * trying to play the instant the raw HTML parses (see the inline script
+ * there), well before this component's own JS bundle can fetch, parse and
+ * mount. This just adopts that element by id and reflects/drives its
+ * play state; App.tsx's LandingMusic pauses it on navigation away from "/".
  */
 export function BackgroundMusic() {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const audio = audioRef.current;
+    const audio = getThemeAudio();
     if (!audio) return;
-    let cancelled = false;
 
-    const unlock = () => {
-      if (cancelled) return;
-      audio.play().then(() => setPlaying(true)).catch(() => {});
-    };
+    const sync = () => setPlaying(!audio.paused);
+    sync();
+    audio.addEventListener("play", sync);
+    audio.addEventListener("pause", sync);
 
-    audio.play().then(() => setPlaying(true)).catch(() => {
-      UNLOCK_EVENTS.forEach((event) => window.addEventListener(event, unlock, { once: true }));
-    });
+    // Covers the case where the page-load attempt in index.html was
+    // blocked and no interaction has happened yet by the time this
+    // mounts — harmless no-op if it's already playing.
+    audio.play().catch(() => {});
 
     return () => {
-      cancelled = true;
-      UNLOCK_EVENTS.forEach((event) => window.removeEventListener(event, unlock));
+      audio.removeEventListener("play", sync);
+      audio.removeEventListener("pause", sync);
     };
   }, []);
 
   const toggle = () => {
-    const audio = audioRef.current;
+    const audio = getThemeAudio();
     if (!audio) return;
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
+    if (audio.paused) {
+      audio.play().catch(() => {});
     } else {
-      audio.play().then(() => setPlaying(true)).catch(() => {});
+      audio.pause();
     }
   };
 
   return (
-    <>
-      <audio ref={audioRef} src={asset("audio/theme.mp3")} loop preload="auto" />
-      <button
-        type="button"
-        className={`u-mono ${styles.toggle}`}
-        onClick={toggle}
-        aria-pressed={playing}
-        aria-label={playing ? "배경음악 정지" : "배경음악 재생"}
-      >
-        <span className={styles.icon} aria-hidden="true">
-          {playing ? "♫" : "♪"}
-        </span>
-        {playing ? "STOP" : "PLAY"}
-      </button>
-    </>
+    <button
+      type="button"
+      className={`u-mono ${styles.toggle}`}
+      onClick={toggle}
+      aria-pressed={playing}
+      aria-label={playing ? "배경음악 정지" : "배경음악 재생"}
+    >
+      <span className={styles.icon} aria-hidden="true">
+        {playing ? "♫" : "♪"}
+      </span>
+      {playing ? "STOP" : "PLAY"}
+    </button>
   );
 }

@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { CartProvider } from "./contexts/CartContext";
@@ -37,18 +37,33 @@ function RouteFallback() {
 declare global {
   interface Window {
     __CONES_BASE__?: string;
+    __CONES_IS_LANDING__?: boolean;
   }
 }
 
 /**
- * Landing-only, mounted at the router root (not inside the lazy-loaded
- * Home chunk) so it starts trying to play at the same instant the intro
- * overlay does, instead of waiting on Home's own code-split bundle.
- * Unmounts — and so stops — the moment the route isn't "/".
+ * The theme song's <audio> lives outside React (a static tag in
+ * index.html, already trying to play before this bundle even loads — see
+ * BackgroundMusic.tsx). This just pauses/resumes that same element as the
+ * route changes, so it still only ever plays on "/" — same landing-only
+ * behavior as before, just controlling a persistent element instead of
+ * mounting/unmounting one.
  */
 function LandingMusic() {
   const location = useLocation();
-  if (location.pathname !== "/") return null;
+  const onLanding = location.pathname === "/";
+
+  useEffect(() => {
+    const audio = document.getElementById("cones-theme") as HTMLAudioElement | null;
+    if (!audio) return;
+    if (onLanding) {
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+    }
+  }, [onLanding]);
+
+  if (!onLanding) return null;
   return <BackgroundMusic />;
 }
 
