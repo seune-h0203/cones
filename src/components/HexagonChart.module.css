@@ -1,0 +1,78 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-sm);
+}
+
+.svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  overflow: visible;
+}
+
+.guideOuter {
+  fill: none;
+  stroke: var(--c-line-strong);
+  stroke-width: 1.4;
+}
+
+.guideInner {
+  fill: none;
+  stroke: var(--c-line-soft);
+  stroke-width: 1;
+}
+
+.axisLine {
+  stroke: var(--c-line-soft);
+  stroke-width: 1;
+}
+
+.valueGroup {
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  transition:
+    transform var(--m-slow) var(--ease),
+    opacity var(--m-normal) var(--ease);
+}
+
+.valueGroup[data-on="true"] {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.valuePolygon {
+  fill: rgba(244, 244, 242, 0.14);
+  stroke: var(--c-white);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.point {
+  fill: var(--c-white);
+}
+
+.label {
+  fill: var(--c-silver);
+  font-family: var(--f-mono);
+  letter-spacing: 0.04em;
+}
+
+.labelValue {
+  fill: var(--c-white);
+}
+
+.caption {
+  color: var(--c-faint);
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+}
+
+@media (max-width: 680px) {
+  .svg {
+    max-width: 320px;
+  }
+}

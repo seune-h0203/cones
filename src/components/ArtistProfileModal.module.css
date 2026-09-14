@@ -54,7 +54,6 @@
 .ability { margin-top: 18px; color: var(--c-silver); font-size: var(--t-label); }
 .quote { margin: 24px 0 30px; color: var(--c-dim); max-width: 36ch; }
 .details { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); margin-top: clamp(32px, 6vw, 72px); padding-top: 28px; border-top: 1px solid var(--c-line-soft); }
-.abilityLine { color: var(--c-silver); font-size: var(--t-micro); }
 .detailKicker { color: var(--c-white); }
 .body { margin-top: 14px; color: var(--c-dim); max-width: 42ch; }
 .profile { margin-top: 28px; border-top: 1px solid var(--c-line-soft); }

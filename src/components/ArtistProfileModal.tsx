@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ABILITY_COPY, profileFields, type Artist } from "../data/artists";
+import { HEXAGON_STATS } from "../data/hexagonStats";
 import { UNITS } from "../data/site";
 import { useFocusTrap, useScrollLock } from "../hooks/useFocusTrap";
 import { track } from "../utils/analytics";
 import { asset } from "../utils/asset";
-import { AbilityMotif } from "./AbilityMotif";
+import { HexagonChart } from "./HexagonChart";
 import { VideoModal } from "./VideoModal";
 import styles from "./ArtistProfileModal.module.css";
 
@@ -65,8 +66,7 @@ export function ArtistProfileModal({ artist, onClose }: { artist: Artist | null;
         </div>
         <div className={styles.details}>
           <div>
-            <AbilityMotif ability={artist.ability} />
-            <p className={`u-mono ${styles.abilityLine}`}>{artist.abilityLine}</p>
+            <HexagonChart key={artist.id} stats={HEXAGON_STATS[artist.id] ?? []} />
           </div>
           <div>
             <p className={`u-kicker ${styles.detailKicker}`}>{ability.title}</p>
