@@ -65,7 +65,7 @@ export const ARTISTS: Artist[] = [
     affiliation: "인공지능학과",
     birthDate: "2003.05.23",
     fandom: "에아",
-    sentence: "열심히 하겟습니다.",
+    sentence: "Dreams come true",
     images: img("rina"),
     objectPosition: "50% 28%",
   },

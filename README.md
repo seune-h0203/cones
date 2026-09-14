@@ -2,7 +2,7 @@
 
 > DIFFERENT ONES, CONNECTED AS ONE.
 
-첫 번째 프로젝트는 `PROJECT : CONNECTION : 00`이며, 데뷔 쇼케이스는 **2026.09.15**로 예정되어 있다. 공식 사이트는 [seune-h0203.github.io/cones](https://seune-h0203.github.io/cones/), 코드 저장소는 [github.com/seune-h0203/cones](https://github.com/seune-h0203/cones)다.
+첫 번째 프로젝트는 `PROJECT : CONNECTION : 00`이며, 데뷔 쇼케이스는 **2026.09.14**로 예정되어 있다. 공식 사이트는 [seune-h0203.github.io/cones](https://seune-h0203.github.io/cones/), 코드 저장소는 [github.com/seune-h0203/cones](https://github.com/seune-h0203/cones)다.
 
 ## 목차
 
@@ -14,7 +14,6 @@
 - [3. 세계관](#3-세계관)
   - [3.1. 콘셉트와 메시지](#31-콘셉트와-메시지)
   - [3.2. 로고](#32-로고)
-  - [3.3. 비주얼](#33-비주얼)
 - [4. 프로젝트](#4-프로젝트)
   - [4.1. PROJECT : CONNECTION : 00](#41-project--connection--00)
   - [4.2. One Page Landing Page](#42-one-page-landing-page)
@@ -42,7 +41,7 @@
 | 멤버 수 | 4인 |
 | 소속 | CONES (CEO / DIRECTOR — 김남주) |
 | 첫 프로젝트 | PROJECT : CONNECTION : 00 |
-| 데뷔(예정) | 2026.09.15 |
+| 데뷔(예정) | 2026.09.14 |
 | 공식 사이트 | https://seune-h0203.github.io/cones/ |
 
 <img src="public/images/director-portrait-sm.jpg" width="140" alt="김남주 CEO / DIRECTOR"><br>
@@ -70,13 +69,11 @@ CONES는 AI UNIT과 COMPUTER UNIT이라는 두 개의 독립된 유닛이 하나
 | 03 | **HYUN JIZEL** (현지젤) | 현세은 | COMPUTER UNIT | `DESIGN` | MAIN PLANNER | 2006.02.03 | 피터 |
 | 04 | **HAM BOM** (함봄) | 함채림 | COMPUTER UNIT | `EXECUTE` | MAIN DEVELOPER | 2002.09.06 | 피터 |
 
-> SERINA의 내부 id는 초기 기획 단계의 가명인 `rina`로 남아 있다. 라우트, 이미지 파일명, 티저 매니페스트 키가 이미 이 값을 쓰고 있어 하위 호환을 위해 유지했을 뿐, 화면에 노출되는 모든 표기는 SERINA / 세리나다.
-
 ### 2.1. AI UNIT
 
 관측한 것을 해석하고, 아직 오지 않은 결과를 계산하는 유닛. 시스템의 "판단"을 담당한다.
 
-- **SERINA** — 세리나 · 박세린. `LEARN` 담당, MAIN DESIGNER. 특기는 수어. 한 줄 소개: *"열심히 하겟습니다."*
+- **SERINA** — 세리나 · 박세린. `LEARN` 담당, MAIN DESIGNER. 특기는 수어. 한 줄 소개: *"Dreams come true"*
 - **BAESAN** — 배산 · 배정호. `PREDICT` 담당, MARKETING. 특기는 끈기. 한 줄 소개: *"꿈이 크면 깨져도 크다"*
 
 ### 2.2. COMPUTER UNIT
@@ -94,7 +91,7 @@ CONES는 AI UNIT과 COMPUTER UNIT이라는 두 개의 독립된 유닛이 하나
 LEARN → PREDICT → DESIGN → EXECUTE → LEARN → … → ∞
 ```
 
-SERINA가 관측한 것(`LEARN`)을 BAESAN이 예측하고(`PREDICT`), 그 예측을 HYUN JIZEL이 구조로 옮기면(`DESIGN`) HAM BOM이 현실에서 실행한다(`EXECUTE`) — 네 사람이 한 바퀴를 이루는 구조다. 이 네 단계는 시스템 순환 다이어그램뿐 아니라 사이트 각 멤버의 ABILITY 표기, 아티스트 상세 화면의 비주얼 언어(`AbilityMotif`, [3.3. 비주얼](#33-비주얼) 참고)까지 전부 동일한 이름으로 일관되게 쓰인다.
+SERINA가 관측한 것(`LEARN`)을 BAESAN이 예측하고(`PREDICT`), 그 예측을 HYUN JIZEL이 구조로 옮기면(`DESIGN`) HAM BOM이 현실에서 실행한다(`EXECUTE`) — 네 사람이 한 바퀴를 이루는 구조다. 이 네 단계는 시스템 순환 다이어그램뿐 아니라 사이트 각 멤버의 ABILITY 표기, 아티스트 상세 화면의 비주얼 언어(`AbilityMotif`)까지 전부 동일한 이름으로 일관되게 쓰인다.
 
 아티스트 상세 화면에는 같은 유닛의 파트너가 함께 소개되는 로직(`getUnitPartner`)이 있어, AI UNIT 안에서는 SERINA ↔ BAESAN이, COMPUTER UNIT 안에서는 HYUN JIZEL ↔ HAM BOM이 서로의 짝으로 묶인다. 그 밖의 개인적인 케미·에피소드는 추후 업데이트 예정.
 
@@ -118,20 +115,9 @@ AI UNIT      COMPUTER UNIT
 
 ### 3.2. 로고
 
+<img src="public/images/cones-logo-solid.png" width="320" alt="CONES wordmark">
+
 CONES 워드마크는 정적인 이미지가 아니라 하나의 인터랙션(`LogoMark`)이다. 전원이 켜지듯 와이프로 드러나고, 워드마크 실루엣을 따라 크롬(chrome) 하이라이트가 흐르며, 숨 쉬듯 은은한 글로우가 번진다. `prefers-reduced-motion` 환경에서는 이 연출이 전부 정적인 로고로 대체된다.
-
-### 3.3. 비주얼
-
-멤버별 ABILITY는 각자 고유한 SVG 비주얼 언어(`AbilityMotif`)를 가진다.
-
-| ABILITY | 비주얼 언어 |
-| --- | --- |
-| LEARN | 데이터 포인트, 스캐닝 라인, 관측 |
-| PREDICT | 하나의 기원에서 갈라져 나가는 미래들 |
-| DESIGN | 블루프린트 프레임, 가이드, 구조 |
-| EXECUTE | 활성화되는 바, 움직이는 포인터 |
-
-전체 톤은 블랙(`#050506`) & 화이트(`#f4f4f2`) 베이스에 실버(`#b9bcc3`)와 크롬 그라디언트를 포인트로 쓴다. 외부 폰트 서비스 없이 시스템 폰트만으로 디스플레이/본문/모노스페이스 타이포를 구성해, 인터넷 연결 없이도 항상 같은 화면을 보여준다. 디렉터 프로필 사진은 흑백(grayscale) 톤으로 맞춰 멤버 사진들과 분위기를 통일했다.
 
 ## 4. 프로젝트
 
@@ -149,7 +135,6 @@ CONES 사이트는 `/` 한 곳에서 스크롤만으로 세계관 · 멤버 · �
 - 아티스트 카드를 클릭하면 페이지 이동 없이 모달로 상세 프로필이 열려, 스크롤의 흐름이 끊기지 않는다.
 - 랜딩페이지의 첫 화면(히어로 이미지·문구·CTA·레이아웃·애니메이션)은 이후 추가된 [4.4. OFFICIAL MD](#44-official-md) 커머스 기능과 완전히 분리되어 있으며, 해당 작업 과정에서 의도적으로 손대지 않았다.
 - 라이브 주소: **https://seune-h0203.github.io/cones/**
-- *(랜딩페이지 프리뷰 이미지 / GIF 삽입 위치 — 준비되는 대로 추가 예정)*
 
 ### 4.3. 티저
 
@@ -167,7 +152,6 @@ CONES 사이트는 `/` 한 곳에서 스크롤만으로 세계관 · 멤버 · �
 
 - `desktop`은 필수, `mobile`(9:16 컷)은 좁은 뷰포트에서 자동 선택된다.
 - manifest에 등록되지 않은 멤버는 실제 포트레이트를 포스터로 띄우고 `SIGNAL PENDING` 상태로 표시한다. 없는 영상을 지어내 채우지 않는 것이 원칙이다. 현재는 **BAESAN** 티저만 실제로 등록되어 있다.
-- `IntersectionObserver`로 화면에 보일 때만 재생하고 벗어나면 즉시 정지하며, 동시에 두 개 이상 디코딩되지 않는다.
 
 ### 4.4. OFFICIAL MD
 
@@ -276,7 +260,7 @@ supabase/
 ### 6.1. 협업 방식
 
 - **GitHub Issues** — `[PLAN]` `[FE]` `[BE]` `[DB]` `[DESIGN]` `[QA]` `[CONTENT]` `[DOCS]` `[FIX]` `[DEPLOY]` `[DEVOPS]` `[PRESENTATION]` 카테고리 라벨과 `STATUS: BACKLOG / READY / IN PROGRESS / DONE` 상태 라벨로 작업을 관리한다.
-- **GitHub Projects / Milestone** — "CONES — FINAL SUBMISSION" 마일스톤으로 전체 작업을 하나의 마감일(2026.09.15)에 맞춰 추적한다. 별도의 Projects 보드 구성은 추후 업데이트 예정.
+- **GitHub Projects / Milestone** — "CONES — FINAL SUBMISSION" 마일스톤으로 전체 작업을 하나의 마감일(2026.09.14)에 맞춰 추적한다. 별도의 Projects 보드 구성은 추후 업데이트 예정.
 - **팀원별 역할** — 이슈마다 표 형식으로 담당(SERINA / BAESAN / HYUN JIZEL / HAM BOM), Kanban 상태, Story Point를 기록한다.
 - **Branch / PR** — 현재는 `main` 단일 브랜치로 운영 중이며, 별도 브랜치 전략과 PR 리뷰 프로세스는 추후 업데이트 예정.
 
@@ -290,7 +274,7 @@ supabase/
 | 2026.09.12 | [4.4. OFFICIAL MD](#44-official-md) 커머스 MVP 추가 — 32개 실제 상품, Supabase DB/Auth, Shop → Cart → Checkout → Order → My Orders 전체 흐름, GitHub Pages SPA 서브패스 라우팅 대응 |
 | 2026.09.13 | 주문 내역(My Orders, 주문 상세)에 실제 상품 이미지 표시 추가, 문서 구조 개편, 멤버 데이터(팬덤·생일) 정합성 수정, GitHub Issues/Kanban 전체 정리(신규 이슈 등록 및 완료 처리) |
 
-CONES는 아직 데뷔 전(pre-debut) 단계다. 별도의 인기 지표, 수상 및 성과 기록은 없으며, 데뷔 쇼케이스(2026.09.15) 이후 업데이트 예정.
+CONES는 아직 데뷔 전(pre-debut) 단계다. 별도의 인기 지표, 수상 및 성과 기록은 없으며, 데뷔 쇼케이스(2026.09.14) 이후 업데이트 예정.
 
 ---
 
