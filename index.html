@@ -96,6 +96,14 @@
         if (!window.__CONES_IS_LANDING__) return;
         var audio = document.getElementById("cones-theme");
         var events = ["pointerdown", "keydown", "touchstart", "wheel"];
+        // Start the track 4s in, timed to land with the intro's opening
+        // beat instead of its own (silent) lead-in. A seek before playback
+        // ever begins sticks regardless of whether this first play()
+        // attempt itself is autoplay-blocked, so this only needs setting
+        // once, here — not again in unlock() below.
+        try {
+          audio.currentTime = 4;
+        } catch (e) {}
         function unlock() {
           audio.play().catch(function () {});
         }
