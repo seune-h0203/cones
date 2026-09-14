@@ -7,7 +7,8 @@ import {
   getUnitPartner,
   profileFields,
 } from "../data/artists";
-import { DEBUT_LABEL, SITE, UNITS } from "../data/site";
+import { DEBUT_DATE, DEBUT_LABEL, SITE, UNITS } from "../data/site";
+import { useCountdown } from "../hooks/useCountdown";
 import { useSeo } from "../hooks/useSeo";
 import { track } from "../utils/analytics";
 import { asset } from "../utils/asset";
@@ -24,6 +25,7 @@ export default function ArtistDetail() {
   const { artistId } = useParams();
   const artist = getArtist(artistId);
   const [teaserOpen, setTeaserOpen] = useState(false);
+  const { isLive } = useCountdown(DEBUT_DATE);
 
   useEffect(() => {
     if (artist) track("artist_view", { artist: artist.id });
@@ -163,8 +165,14 @@ export default function ArtistDetail() {
         <div className="u-container">
           <SectionHeader index="05" kicker="DEBUT" title="DEBUT SHOWCASE" />
           <Reveal className={styles.debut}>
-            <p className={`u-display ${styles.debutDate}`}>{DEBUT_LABEL}</p>
-            <Countdown variant="hero" />
+            {isLive ? (
+              <Countdown variant="hero" />
+            ) : (
+              <>
+                <p className={`u-display ${styles.debutDate}`}>{DEBUT_LABEL}</p>
+                <Countdown variant="hero" />
+              </>
+            )}
           </Reveal>
         </div>
       </section>

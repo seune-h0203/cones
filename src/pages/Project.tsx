@@ -94,7 +94,7 @@ export default function Project() {
         <div className="u-container">
           <SectionHeader index="03" kicker="DEBUT SHOWCASE" title={isLive ? "NOW LIVE" : DEBUT_LABEL} />
           <Reveal className={styles.debut}>
-            <Countdown variant="hero" />
+            {!isLive && <Countdown variant="hero" />}
             <Link to="/artists" className="u-btn u-btn--primary">
               MEET THE ARTISTS <span className="u-arrow">→</span>
             </Link>

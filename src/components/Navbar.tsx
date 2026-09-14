@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { DEBUT_LABEL, NAV, SITE } from "../data/site";
+import { DEBUT_DATE, DEBUT_LABEL, NAV, SITE } from "../data/site";
 import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
+import { useCountdown } from "../hooks/useCountdown";
 import { useScrollLock } from "../hooks/useFocusTrap";
 import { asset } from "../utils/asset";
 import { Countdown } from "./Countdown";
@@ -13,6 +14,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const { totalCount } = useCart();
+  const { isLive } = useCountdown(DEBUT_DATE);
   useScrollLock(open);
 
   useEffect(() => {
@@ -109,8 +111,14 @@ export function Navbar() {
           </nav>
           <div className={styles.overlayFoot}>
             <p className="u-kicker">DEBUT SHOWCASE</p>
-            <p className={`u-mono ${styles.overlayDate}`}>{DEBUT_LABEL}</p>
-            <Countdown variant="inline" />
+            {isLive ? (
+              <Countdown variant="inline" />
+            ) : (
+              <>
+                <p className={`u-mono ${styles.overlayDate}`}>{DEBUT_LABEL}</p>
+                <Countdown variant="inline" />
+              </>
+            )}
             <div className={styles.overlayAccount}>
               <Link to="/cart" className={styles.cartLink} onClick={() => setOpen(false)}>
                 <span className="u-mono">CART</span>
