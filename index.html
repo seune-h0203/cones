@@ -60,10 +60,6 @@
           var path = parts[0];
           var query = parts[1] ? "?" + parts[1] : "";
           history.replaceState(null, "", window.__CONES_BASE__.slice(0, -1) + path + query);
-          // The theme song (below) only auto-starts on the landing route —
-          // this is the one place before React mounts where we know the
-          // real in-app path being landed on.
-          window.__CONES_IS_LANDING__ = path === "/" || path === "";
           return;
         }
 
@@ -82,7 +78,6 @@
           routeIndex === -1
             ? location.pathname.replace(/\/?$/, "/")
             : "/" + segments.slice(0, routeIndex).join("/") + "/";
-        window.__CONES_IS_LANDING__ = routeIndex === -1;
       })();
     </script>
     <!-- Lives outside React entirely so playback can be attempted the
@@ -93,7 +88,9 @@
     <audio id="cones-theme" src="./audio/theme.mp3" loop preload="auto"></audio>
     <script>
       (function () {
-        if (!window.__CONES_IS_LANDING__) return;
+        // Plays site-wide (every route, including while a teaser video is
+        // open in a modal) — nothing pauses this element except the
+        // manual STOP toggle (BackgroundMusic.tsx).
         var audio = document.getElementById("cones-theme");
         var events = ["pointerdown", "keydown", "touchstart", "wheel"];
         var STORAGE_KEY = "cones-theme-time";
