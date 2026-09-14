@@ -1,0 +1,542 @@
+.stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--c-black);
+  isolation: isolate;
+}
+
+/* ---------- shared entrance keyframes ---------- */
+
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- scene 01 — opening flash + metallic line ---------- */
+
+.openingFlash {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  background: var(--c-white);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage[data-scene="opening"] .openingFlash {
+  animation: openFlash 260ms steps(3, end) both;
+}
+
+@keyframes openFlash {
+  0% { opacity: 0; }
+  20% { opacity: 0.5; }
+  40% { opacity: 0; }
+  60% { opacity: 0.22; }
+  100% { opacity: 0; }
+}
+
+.metalLine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--chrome);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.6);
+  z-index: 10;
+}
+
+.stage[data-scene="opening"] .metalLine {
+  animation: lineExpand 380ms var(--ease-inout) both 60ms;
+}
+
+@keyframes lineExpand {
+  from { width: 0; opacity: 0; }
+  55% { opacity: 1; }
+  to { width: 72vw; opacity: 0; }
+}
+
+/* ---------- members (scenes 02-05) ---------- */
+
+.member {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.memberImgWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.memberImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.15);
+  filter: blur(8px);
+}
+
+.memberSweep {
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(100deg, transparent 42%, rgba(255, 255, 255, 0.55) 50%, transparent 58%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-35%);
+  z-index: 3;
+}
+
+.memberBg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: clamp(6rem, 24vw, 22rem);
+  color: rgba(255, 255, 255, 0.05);
+  white-space: nowrap;
+  z-index: 1;
+  opacity: 0;
+}
+
+.memberIndex {
+  position: absolute;
+  left: var(--gutter);
+  bottom: calc(var(--gutter) + 4.2rem);
+  color: var(--c-silver);
+  font-size: var(--t-micro);
+  letter-spacing: 0.3em;
+  z-index: 4;
+  opacity: 0;
+}
+
+.memberName {
+  position: absolute;
+  left: var(--gutter);
+  bottom: var(--gutter);
+  font-size: clamp(3rem, 12vw, 9.5rem);
+  color: var(--c-white);
+  z-index: 4;
+  opacity: 0;
+}
+
+/* ---- BAESAN: fast horizontal clip-path reveal, scale + blur -> sharp ---- */
+
+.stage[data-scene="baesan"] .member[data-role="baesan"] {
+  opacity: 1;
+  animation: hReveal 640ms var(--ease) both;
+}
+
+.stage[data-scene="baesan"] .member[data-role="baesan"] .memberImg {
+  animation: imgSettle 640ms var(--ease) both;
+}
+
+.stage[data-scene="baesan"] .member[data-role="baesan"] .memberSweep {
+  animation: sweepAcross 640ms var(--ease-inout) both 40ms;
+}
+
+.stage[data-scene="baesan"] .member[data-role="baesan"] .memberBg {
+  animation: fadeUpIn 500ms var(--ease) both 60ms;
+  opacity: 1;
+}
+
+.stage[data-scene="baesan"] .member[data-role="baesan"] .memberIndex,
+.stage[data-scene="baesan"] .member[data-role="baesan"] .memberName {
+  animation: fadeUpIn 420ms var(--ease) both 220ms;
+}
+
+@keyframes hReveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes imgSettle {
+  from { transform: scale(1.15); filter: blur(10px); }
+  to { transform: scale(1); filter: blur(0); }
+}
+
+@keyframes sweepAcross {
+  0% { opacity: 0; transform: translateX(-35%); }
+  45% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateX(35%); }
+}
+
+/* ---- SERINA: vertical split reveal + white flash + opposite-direction type ---- */
+
+.stage[data-scene="rina"] .member[data-role="rina"] {
+  opacity: 1;
+}
+
+.stage[data-scene="rina"] .member[data-role="rina"] .memberImgWrap {
+  animation: vSplit 600ms var(--ease-inout) both;
+}
+
+.stage[data-scene="rina"] .member[data-role="rina"] .memberImg {
+  animation: imgSettle 600ms var(--ease) both;
+}
+
+.stage[data-scene="rina"] .member[data-role="rina"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--c-white);
+  z-index: 5;
+  pointer-events: none;
+  animation: quickFlash 260ms linear both;
+}
+
+.stage[data-scene="rina"] .member[data-role="rina"] .memberBg {
+  animation: fadeUpIn 500ms var(--ease) both 60ms;
+  opacity: 1;
+}
+
+.stage[data-scene="rina"] .member[data-role="rina"] .memberIndex,
+.stage[data-scene="rina"] .member[data-role="rina"] .memberName {
+  animation: slideFromRight 440ms var(--ease) both 200ms;
+}
+
+@keyframes vSplit {
+  from { clip-path: inset(0 50% 0 50%); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes quickFlash {
+  0% { opacity: 0.9; }
+  100% { opacity: 0; }
+}
+
+@keyframes slideFromRight {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* ---- HYUN JIZEL: brief glitch/jitter + fast zoom, settles quickly ---- */
+
+.stage[data-scene="hyun-jizel"] .member[data-role="hyun-jizel"] {
+  opacity: 1;
+}
+
+.stage[data-scene="hyun-jizel"] .member[data-role="hyun-jizel"] .memberImg {
+  animation: hjGlitch 640ms var(--ease) both;
+}
+
+.stage[data-scene="hyun-jizel"] .member[data-role="hyun-jizel"] .memberBg {
+  animation: fadeUpIn 500ms var(--ease) both 60ms;
+  opacity: 1;
+}
+
+.stage[data-scene="hyun-jizel"] .member[data-role="hyun-jizel"] .memberIndex,
+.stage[data-scene="hyun-jizel"] .member[data-role="hyun-jizel"] .memberName {
+  animation: hjTypeJitter 440ms var(--ease) both 120ms;
+}
+
+@keyframes hjGlitch {
+  0% { transform: translate3d(0, 0, 0) scale(1.15); filter: blur(6px) contrast(1) saturate(1) hue-rotate(0deg); }
+  8% { transform: translate3d(-8px, 2px, 0) scale(1.12); filter: contrast(1.4) saturate(1.8) hue-rotate(-10deg); }
+  16% { transform: translate3d(7px, -2px, 0) scale(1.12); filter: contrast(1.4) saturate(1.8) hue-rotate(10deg); }
+  24% { transform: translate3d(-4px, 0, 0) scale(1.08); filter: contrast(1.15) saturate(1.3) hue-rotate(0deg); }
+  32%, 100% { transform: translate3d(0, 0, 0) scale(1); filter: contrast(1) saturate(1) hue-rotate(0deg); }
+}
+
+@keyframes hjTypeJitter {
+  0% { opacity: 0; transform: translate3d(-6px, 0, 0); }
+  30% { opacity: 1; transform: translate3d(3px, 0, 0); }
+  45% { transform: translate3d(-2px, 0, 0); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* ---- HAM BOM: mask reveal + slight rotate settle + tracking type ---- */
+
+.stage[data-scene="ham-bom"] .member[data-role="ham-bom"] {
+  opacity: 1;
+}
+
+.stage[data-scene="ham-bom"] .member[data-role="ham-bom"] .memberImg {
+  animation: hambomReveal 640ms var(--ease) both;
+}
+
+.stage[data-scene="ham-bom"] .member[data-role="ham-bom"] .memberBg {
+  animation: fadeUpIn 500ms var(--ease) both 60ms;
+  opacity: 1;
+}
+
+.stage[data-scene="ham-bom"] .member[data-role="ham-bom"] .memberIndex {
+  animation: fadeUpIn 420ms var(--ease) both 260ms;
+}
+
+.stage[data-scene="ham-bom"] .member[data-role="ham-bom"] .memberName {
+  animation: trackingIn 520ms var(--ease) both 220ms;
+}
+
+@keyframes hambomReveal {
+  from { clip-path: inset(0 0 100% 0); transform: scale(1.22) rotate(2.4deg); filter: blur(8px); }
+  62% { clip-path: inset(0 0 0% 0); transform: scale(1.05) rotate(0.4deg); filter: blur(0); }
+  100% { clip-path: inset(0 0 0 0); transform: scale(1) rotate(0deg); filter: blur(0); }
+}
+
+@keyframes trackingIn {
+  from { opacity: 0; letter-spacing: 0.5em; }
+  to { opacity: 1; letter-spacing: 0.02em; }
+}
+
+/* ---------- rapid cut (3.2s-3.5s) ---------- */
+
+.rapidCut {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage[data-scene="rapidcut"] .rapidCut {
+  opacity: 1;
+}
+
+.rapidImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+
+@keyframes rapidShow {
+  to { opacity: 1; }
+}
+
+.stage[data-scene="rapidcut"] .rapidImg:nth-child(1) { animation: rapidShow 1ms linear 0ms both; }
+.stage[data-scene="rapidcut"] .rapidImg:nth-child(2) { animation: rapidShow 1ms linear 75ms both; }
+.stage[data-scene="rapidcut"] .rapidImg:nth-child(3) { animation: rapidShow 1ms linear 150ms both; }
+.stage[data-scene="rapidcut"] .rapidImg:nth-child(4) { animation: rapidShow 1ms linear 225ms both; }
+
+/* ---------- four members quad (3.5s-4.1s) + converge (4.1s-4.7s) ---------- */
+
+.quad {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1px;
+  background: var(--c-black);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage[data-scene="four"] .quad {
+  opacity: 1;
+}
+
+.stage[data-scene="cones"] .quad {
+  animation: quadFadeOut 460ms var(--ease) both 200ms;
+}
+
+@keyframes quadFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.quadPanel {
+  position: relative;
+  overflow: hidden;
+}
+
+.quadPanel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.1);
+}
+
+.stage[data-scene="four"] .quadPanel[data-role="baesan"] {
+  animation: panelInTL 520ms var(--ease) both;
+}
+.stage[data-scene="four"] .quadPanel[data-role="rina"] {
+  animation: panelInTR 520ms var(--ease) both 40ms;
+}
+.stage[data-scene="four"] .quadPanel[data-role="hyun-jizel"] {
+  animation: panelInBL 520ms var(--ease) both 80ms;
+}
+.stage[data-scene="four"] .quadPanel[data-role="ham-bom"] {
+  animation: panelInBR 520ms var(--ease) both 120ms;
+}
+
+@keyframes panelInTL {
+  from { transform: translate3d(-55%, -55%, 0); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes panelInTR {
+  from { transform: translate3d(55%, -55%, 0); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes panelInBL {
+  from { transform: translate3d(-55%, 55%, 0); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes panelInBR {
+  from { transform: translate3d(55%, 55%, 0); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.stage[data-scene="cones"] .quadPanel {
+  animation: panelConverge 480ms var(--ease-inout) both;
+}
+
+@keyframes panelConverge {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.15); opacity: 0; }
+}
+
+.quadCaption {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  pointer-events: none;
+}
+
+.quadLine {
+  position: absolute;
+  opacity: 0;
+  font-size: clamp(1.8rem, 6.4vw, 4.6rem);
+  color: var(--c-white);
+  text-align: center;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+
+.stage[data-scene="four"] .quadLineA {
+  animation: capFadeInOut 600ms var(--ease) both;
+}
+
+.stage[data-scene="four"] .quadLineB {
+  animation: fadeUpIn 420ms var(--ease) both 320ms;
+}
+
+@keyframes capFadeInOut {
+  0% { opacity: 0; }
+  18% { opacity: 1; }
+  55% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ---------- scene 07 — CONES finale ---------- */
+
+.finale {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-md);
+  text-align: center;
+  padding: var(--gutter);
+  opacity: 0;
+}
+
+.stage[data-scene="cones"] .finale {
+  animation: fadeUpIn 500ms var(--ease) both 240ms;
+}
+
+.finaleLogoStage {
+  display: inline-block;
+}
+
+.stage[data-scene="cones"] .finaleLogoStage {
+  animation: finaleImpact 620ms var(--ease) both 260ms;
+}
+
+@keyframes finaleImpact {
+  0% { transform: scale(0.7); opacity: 0; filter: brightness(2.2); }
+  55% { transform: scale(1.08); opacity: 1; filter: brightness(1.5); }
+  100% { transform: scale(1); opacity: 1; filter: brightness(1); }
+}
+
+.finaleLogo {
+  width: clamp(220px, 46vw, 620px);
+}
+
+.finaleTagline {
+  color: var(--c-dim);
+  font-size: var(--t-micro);
+  letter-spacing: 0.28em;
+  opacity: 0;
+}
+
+.stage[data-scene="cones"] .finaleTagline {
+  animation: fadeUpIn 420ms var(--ease) both 540ms;
+}
+
+/* The CONES logo scales up slightly the moment LoadingScreen starts
+   sliding the whole overlay away (see the `exiting` prop -> data-exiting,
+   set once `ready` flips there), so the zoom and the slide read as one
+   continuous motion instead of two disconnected transitions. A plain
+   `transform` override here wouldn't win: finaleImpact's fill-mode:both
+   keeps owning the property indefinitely once the "cones" scene is
+   reached, so the exit state needs its own animation to actually take
+   over rather than a static transform competing with a held one. */
+.stage[data-exiting="true"] .finaleLogoStage {
+  animation: finaleExitScale 760ms var(--ease) both;
+}
+
+@keyframes finaleExitScale {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+/* ---------- skip ---------- */
+
+.skip {
+  position: absolute;
+  top: var(--gutter);
+  right: var(--gutter);
+  z-index: 20;
+  padding: 8px 16px;
+  border: 1px solid var(--c-line);
+  color: var(--c-dim);
+  font-size: var(--t-micro);
+  letter-spacing: 0.22em;
+  background: rgba(5, 5, 6, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: color 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.skip:hover,
+.skip:focus-visible {
+  color: var(--c-white);
+  border-color: var(--c-line-strong);
+}
+
+.stage[data-exiting="true"] .skip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms var(--ease);
+}
+
+@media (max-width: 640px) {
+  .memberIndex { bottom: calc(var(--gutter) + 3rem); }
+  .memberName { font-size: clamp(2.4rem, 15vw, 5rem); }
+  .quadLine { font-size: clamp(1.4rem, 8vw, 2.6rem); }
+}

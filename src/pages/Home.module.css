@@ -72,7 +72,12 @@
 }
 
 .heroLogo {
-  width: clamp(280px, 88vw, 1760px);
+  /* A flat vw factor doesn't scale well across a wide viewport range: the
+     previous 88vw read as tastefully large at 1280-1366px but nearly
+     edge-to-edge (and visually "off") by 1920px, since both got ~88% of
+     very different widths. A lower factor + an earlier-saturating cap
+     keeps it in a consistent ~50-60% band across 1280-1920px. */
+  width: clamp(260px, 58vw, 980px);
   transform: translate3d(var(--px, 0), var(--py, 0), 0);
   transition: transform 700ms var(--ease);
 }
